@@ -32,8 +32,7 @@
 		</thead>
 	</table>
 	
-	<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px"
-			closed="true" buttons="#dlg-buttons">
+	<div id="dlg" class="easyui-dialog" style="width:400px;height:380px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
 		<div class="ftitle">Cliente</div>
 		<form id="fm" method="post" novalidate>
 			<div class="fitem">
@@ -60,6 +59,7 @@
 				<label>Tipo:</label>
 				<input name="sellerType" class="easyui-textbox">
 			</div>
+			
 		</form>
 	</div>
 	<div id="dlg-buttons">
@@ -68,12 +68,12 @@
 	</div>
 	<script type="text/javascript">
 		var url;
-		function newClient(){
+		function newClient() {
 			$('#dlg').dialog('open').dialog('setTitle','Nuevo Cliente');
 			$('#fm').form('clear');
 			url = 'clients/create_client.php';
 		}
-		function editClient(){
+		function editClient() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
 				$('#dlg').dialog('open').dialog('setTitle','Editar Cliente');
@@ -81,7 +81,7 @@
 				url = 'clients/edit_client.php?id='+row.id;
 			}
 		}
-		function saveClient(){
+		function saveClient() {
 			$('#fm').form('submit',{
 				url: url,
 				onSubmit: function(){
@@ -101,7 +101,7 @@
 				}
 			});
 		}
-		function deleteClient(){
+		function deleteClient() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
 				$.messager.confirm('Confirm','Está seguro de que desea eliminar este cliente?',function(r){
