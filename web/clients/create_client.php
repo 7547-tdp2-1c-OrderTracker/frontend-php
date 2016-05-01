@@ -1,16 +1,18 @@
 <?php
 	include '../common/trackerman_api.php';
 
-	$name = htmlspecialchars($_REQUEST['name']);
-	$lastname = htmlspecialchars($_REQUEST['lastname']);
-	$cuil = htmlspecialchars($_REQUEST['cuil']);
-	$address = htmlspecialchars($_REQUEST['address']);
-	$phone = htmlspecialchars($_REQUEST['phone_number']);
-	$email = htmlspecialchars($_REQUEST['email']);
-	$type = htmlspecialchars($_REQUEST['sellerType']);
-	$lat = htmlspecialchars($_REQUEST['lat']);
-	$lon = htmlspecialchars($_REQUEST['lon']);
+	$attrs['name'] = htmlspecialchars($_REQUEST['name']);
+	$attrs['lastname'] = htmlspecialchars($_REQUEST['lastname']);
+	$attrs['cuil'] = htmlspecialchars($_REQUEST['cuil']);
+	$attrs['address'] = htmlspecialchars($_REQUEST['address']);
+	$attrs['phone_number'] = htmlspecialchars($_REQUEST['phone_number']);
+	$attrs['email'] = htmlspecialchars($_REQUEST['email']);
+	$attrs['sellerType'] = htmlspecialchars($_REQUEST['sellerType']);
+	$attrs['avatar'] = htmlspecialchars($_REQUEST['avatar']);
+	$attrs['thumbnail'] = htmlspecialchars($_REQUEST['thumbnail']);
+	$attrs['lat'] = htmlspecialchars($_REQUEST['lat']);
+	$attrs['lon'] = htmlspecialchars($_REQUEST['lon']);
 
-	$json = TrackermanAPI::createClient($name, $lastname, $cuil, $address, $phone, $email, $type, $lat, $lon);
+	$json = TrackermanAPI::createClient($attrs);
 
 	echo json_encode($json);

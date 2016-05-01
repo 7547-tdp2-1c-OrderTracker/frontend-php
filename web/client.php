@@ -75,6 +75,14 @@
 						<label>Tipo:</label>
 						<input name="sellerType" class="easyui-textbox">
 					</div>
+					<div class="fitem">
+						<label>Avatar:</label>
+						<input name="avatar" class="easyui-textbox">
+					</div>
+					<div class="fitem">
+						<label>Thumbnail:</label>
+						<input name="thumbnail" class="easyui-textbox">
+					</div>
 		    		<input type="hidden" name="lat" value="">
 		    		<input type="hidden" name="lon" value="">
 	    		</div>
