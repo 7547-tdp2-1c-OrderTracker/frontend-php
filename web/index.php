@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
+	<script type="text/javascript" src="lib/fn.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -132,8 +133,7 @@
 			}
 		}
 
-		$("[name='address']").bind('keydown', function(e) {
-			if (e.keyCode == 13) {  // when press ENTER key
+		$("[name='address']").bind('keydown', fn.debounce(function(e) {
 				var address = $("[name='address']").val();
 
 			    geocoder.geocode({ 'address': address, 'componentRestrictions':{'country':'AR', 'locality':'Buenos Aires'}}, 
@@ -146,8 +146,7 @@
 						}
 					}
 				);
-			}
-		});
+		}, 440));
 	</script>
 
 	<script type="text/javascript">
