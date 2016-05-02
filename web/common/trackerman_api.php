@@ -63,8 +63,8 @@
 			return putJSON(self::$baseUrl."/v1/schedule_entries/".$id, $body);
 		}
 
-		static function deleteScheduleEntry($body) {
-			$vars['client_id'] = $body['client_id'];
+		static function deleteScheduleEntry($client_id) {
+			$vars['client_id'] = $client_id;
 			$entry = getJSON(self::$baseUrl."/v1/schedule_entries", $vars);
 			$id = $entry['results'][0]['id'];
 
