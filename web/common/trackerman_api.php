@@ -2,7 +2,7 @@
 	include 'http_request.php';
 
 	class TrackermanAPI {
-		private static $baseUrl = "https://powerful-hollows-15939.herokuapp.com";
+		private static $baseUrl = "https://trackerman-api.herokuapp.com";
 
 		// CLIENTES
 
