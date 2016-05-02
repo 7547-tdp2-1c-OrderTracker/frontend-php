@@ -10,22 +10,30 @@ body {
     height:100%;
 }
 
+#sellers{
+  padding: 10px 0 10px 215px;
+  background: #ccc;
+  margin-bottom: 20px;
+}
+
 #modulo2 {
     width:100%;
     height:40px;
     background:#f0f0f0;
     border-bottom: 1px solid #ccc;
     color: blue;
-     text-align: justify;
+    text-align: justify;
+
 }
 
 #modulo2 p {
   font-family: Arial;
   font-size: 16px;
   margin: 0;
-  padding: 15px 0 0 215px;
+  padding: 10px 0 0 15px;
   color: #5162c0;
   font-weight: bold;
+  float: left;
 }
 
 #logoMenu img{

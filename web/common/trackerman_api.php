@@ -4,10 +4,19 @@
 	class TrackermanAPI {
 		private static $baseUrl = "https://trackerman-api.herokuapp.com";
 
-		static function listClients($limit, $offset) {
+		// CLIENTES
+
+		static function getClient($id) {
+			return getJSON(self::$baseUrl."/v1/clients/".$id, []);
+		}
+
+		static function listClients($limit, $offset, $unnasigned) {
 			$vars['limit'] = $limit;
 			$vars['offset'] = $offset;
-
+			if($unnasigned) {
+				$vars['seller_id'] = 'null';
+			}
+			
 			return getJSON(self::$baseUrl."/v1/clients", $vars);
 		}
 
@@ -22,4 +31,44 @@
 		static function deleteClient($id) {
 			return deleteJSON(self::$baseUrl."/v1/clients/".$id);
 		}
+
+		// VENDEDORES
+
+		static function listSellers($limit, $offset) {
+			$vars['limit'] = $limit;
+			$vars['offset'] = $offset;
+
+			return getJSON(self::$baseUrl."/v1/sellers", $vars);
+		}
+
+		// AGENDA
+
+		static function listScheduleEntries($seller) {
+			$vars['limit'] = 100;
+			$vars['offset'] = 0;
+			$vars['seller_id'] = $seller;
+
+			return getJSON(self::$baseUrl."/v1/schedule_entries", $vars);
+		}
+
+		static function createScheduleEntry($body) {
+			return postJSON(self::$baseUrl."/v1/schedule_entries", $body);
+		}
+
+		static function editScheduleEntry($body) {
+			$vars['client_id'] = $body['client_id'];
+			$entry = getJSON(self::$baseUrl."/v1/schedule_entries", $vars);
+			$id = $entry['results'][0]['id'];
+
+			return putJSON(self::$baseUrl."/v1/schedule_entries/".$id, $body);
+		}
+
+		static function deleteScheduleEntry($body) {
+			$vars['client_id'] = $body['client_id'];
+			$entry = getJSON(self::$baseUrl."/v1/schedule_entries", $vars);
+			$id = $entry['results'][0]['id'];
+
+			return deleteJSON(self::$baseUrl."/v1/schedule_entries/".$id);
+		}
+	
 	}

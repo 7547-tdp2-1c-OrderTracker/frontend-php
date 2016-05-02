@@ -1,69 +1,67 @@
-		var defaultZoom = 16;
-		var map;
-		var marker;
-		var geocoder;
-		
-		function updateMap(location) {
-		    if(!map) {
-			    var myOptions = {
-			        zoom: defaultZoom,
-			        mapTypeId: 'roadmap',
-			        mapTypeControl: false,
-			        streetViewControl: false
-			    };
+var defaultZoom = 15;
+var map;
+var marker;
+var geocoder;
 
-		    	map = new google.maps.Map($('#map')[0], myOptions);
-			    geocoder = new google.maps.Geocoder();
+function updateMap(location) {
+    if(!map) {
+	    var myOptions = {
+	        zoom: defaultZoom,
+	        mapTypeId: 'roadmap',
+	        mapTypeControl: false,
+	        streetViewControl: false
+	    };
 
-			    marker = new google.maps.Marker({
-			        position: location,
-			        map: map,
-			        draggable: true
-			    });
+    	map = new google.maps.Map($('#map')[0], myOptions);
+	    geocoder = new google.maps.Geocoder();
 
-			    marker.addListener('dragend', function() {
-				    var location = marker.getPosition();
-					map.setCenter(location);
+	    marker = new google.maps.Marker({
+	        position: location,
+	        map: map,
+	        draggable: true
+	    });
 
-				    geocoder.geocode({'location': location}, function(results, status) {
-					    if(status === google.maps.GeocoderStatus.OK) {
-					    	var addr = results[0].formatted_address;
-					    	addr = addr.substr(0, addr.indexOf(","));
-					    	$("[name='address']").val(addr);
+	    marker.addListener('dragend', function() {
+		    var location = marker.getPosition();
+			map.setCenter(location);
 
-					    	$("[name='lat']").val(location.toJSON().lat);
-							$("[name='lon']").val(location.toJSON().lng);
-					    }
-					    else {
-					      window.alert('No se pudo obtener la dirección en el mapa: ' + status);
-					    }
-					});
-			  	});
-		    }
+		    geocoder.geocode({'location': location}, function(results, status) {
+			    if(status === google.maps.GeocoderStatus.OK) {
+			    	var addr = results[0].formatted_address;
+			    	addr = addr.substr(0, addr.indexOf(","));
+			    	$("[name='address']").val(addr);
 
-			if(location) {
-			    map.setCenter(location);
-			    map.setZoom(defaultZoom);
-			    marker.setPosition(location);			    
-    
-				$("[name='lat']").val(location.toJSON().lat);
-				$("[name='lon']").val(location.toJSON().lng);
+			    	$("[name='lat']").val(location.toJSON().lat);
+					$("[name='lon']").val(location.toJSON().lng);
+			    }
+			    else {
+			      window.alert('No se pudo obtener la dirección en el mapa: ' + status);
+			    }
+			});
+	  	});
+    }
+
+	if(location) {
+	    map.setCenter(location);
+	    map.setZoom(defaultZoom);
+	    marker.setPosition(location);			    
+
+		$("[name='lat']").val(location.toJSON().lat);
+		$("[name='lon']").val(location.toJSON().lng);
+	}
+}
+
+$("[name='address']").bind('keydown', fn.debounce(function(e) {
+		var address = $("[name='address']").val();
+
+	    geocoder.geocode({ 'address': address, 'componentRestrictions':{'country':'AR'/*, 'locality':'Buenos Aires'*/}}, 
+			function(results, status) {
+				if (status === google.maps.GeocoderStatus.OK) {
+					updateMap(results[0].geometry.location);
+				}
+				else {
+					alert("No se pudo obtener la ubicación en el mapa: " + status);
+				}
 			}
-		}
-
-		$("[name='address']").bind('keydown', function(e) {
-			if (e.keyCode == 13) {  // when press ENTER key
-				var address = $("[name='address']").val();
-
-			    geocoder.geocode({ 'address': address, 'componentRestrictions':{'country':'AR'/*, 'locality':'Buenos Aires'*/}}, 
-					function(results, status) {
-						if (status === google.maps.GeocoderStatus.OK) {
-							updateMap(results[0].geometry.location);
-						}
-						else {
-							alert("No se pudo obtener la ubicación en el mapa: " + status);
-						}
-					}
-				);
-			}
-		});
+		);
+}, 440));
