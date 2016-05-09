@@ -48,12 +48,12 @@
 			<thead>
 				<tr>
 					<th field="id">Nro Orden</th>
-					<th field="client">Cliente</th>
+					<th field="client_name">Cliente</th>
 					<th field="total_price">Monto</th>
 					<th field="status">Estado</th>
 					<th field="seller_id">Vendedor</th>
 					<th field="date_created">Fecha Creación</th>
-					<th field="order_items">Bultos</th>
+					<th field="items">Bultos</th>
 				</tr>
 			</thead>
 		</table>

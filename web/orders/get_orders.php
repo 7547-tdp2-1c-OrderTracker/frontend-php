@@ -7,8 +7,10 @@
 	
 	$json = TrackermanAPI::listOrders($limit, $offset, false);
 	foreach ($json["results"] as &$valor){
-    	$valor[clientName] =  $valor[client][lastname] . ", " . $valor[client][name];
+    	$valor[client_name] =  $valor[client][lastname] . ", " . $valor[client][name];
+    	$valor[items] = count($valor[order_items]);
     	unset($valor[client]);
+    	unset($valor[order_items]);
 	}
 
 	$result["total"] = $json["paging"]["total"];
