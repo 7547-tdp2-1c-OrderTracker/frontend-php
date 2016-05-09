@@ -8,6 +8,8 @@
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
 	<script type="text/javascript" src="lib/fn.js"></script>
+	<script type="text/javascript" src="lib/moment.js"></script>
+	<script type="text/javascript" src="common/helpers.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="orders/orders.css">
@@ -51,7 +53,7 @@
 					<th field="total_price">Monto</th>
 					<th field="status">Estado</th>
 					<th field="seller_id">Vendedor</th>
-					<th field="date_created">Fecha Creación</th>
+					<th field="date_created" formatter="formatDate">Fecha Creación</th>
 					<th field="order_items">Bultos</th>
 				</tr>
 			</thead>
