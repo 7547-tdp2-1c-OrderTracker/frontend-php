@@ -1,16 +1,14 @@
 <html>
 <head>
-	<meta charset="UTF-8">
 	<title>Trackerman - Clientes</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
-	<script type="text/javascript" src="lib/fn.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="lib/fn.js"></script>
 	<link rel="stylesheet" type="text/css" href="clients/client.css">
 	<?php
 		include 'general/header.php';
@@ -22,7 +20,7 @@
 	?>
 
 	<div id="modulo2">
-	    <p><?php echo "Clientes"; ?></p>
+	    <p>Clientes</p>
 	</div>
 
 	<div id="modulo3-contenido">
@@ -47,7 +45,7 @@
 			</thead>
 		</table>
 		
-		<div id="dlg" class="easyui-dialog" style="width:700px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" style="width:740px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
 			<div class="ftitle">Cliente</div>
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">

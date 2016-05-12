@@ -73,13 +73,10 @@
 
 		// PEDIDOS
 
-		static function listOrders($limit, $offset, $seller_id) {
+		static function listOrders($limit, $offset) {
 			$vars['limit'] = $limit;
 			$vars['offset'] = $offset;
-			if($seller_id) {
-				$vars['seller_id'] = $seller_id;
-			}
-			
+
 			return getJSON(self::$baseUrl."/v1/orders", $vars);
 		}
 	

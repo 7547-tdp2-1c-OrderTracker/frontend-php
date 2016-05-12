@@ -5,12 +5,13 @@
 	$limit = isset($_REQUEST['rows']) ? intval($_REQUEST['rows']) : 16;
 	$offset = ($page-1)*$limit;
 	
-	$json = TrackermanAPI::listOrders($limit, $offset, false);
-	foreach ($json["results"] as &$valor){
-    	$valor[client_name] =  $valor[client][lastname] . ", " . $valor[client][name];
-    	$valor[items] = count($valor[order_items]);
-    	unset($valor[client]);
-    	unset($valor[order_items]);
+	$json = TrackermanAPI::listOrders($limit, $offset);
+	
+	foreach ($json["results"] as &$valor) {
+    	$valor["client_name"] =  $valor["client"]["lastname"].", ".$valor["client"]["name"];
+    	$valor["items"] = count($valor["order_items"]);
+    	unset($valor["client"]);
+    	unset($valor["order_items"]);
 	}
 
 	$result["total"] = $json["paging"]["total"];

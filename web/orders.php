@@ -1,40 +1,22 @@
 <html>
 <head>
-	<meta charset="UTF-8">
 	<title>Trackerman - Pedidos</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
 	<script type="text/javascript" src="lib/fn.js"></script>
-	<script type="text/javascript" src="lib/moment.js"></script>	
-	<script type="text/javascript" src="common/helpers.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="lib/moment.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
 	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="orders/orders.css">
-	<!-- ?php include 'general/header.php'; ? -->
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<link rel="stylesheet" type="text/css" href="general/general.css">
-	
+	<?php
+		include 'general/header.php';
+	?>
 </head>
 <body>
-	<!-- ?php include 'general/general.php'; ? -->
-    <div id="modulo1">
-        <div id="logoMenu">
-            <img src="images/trackermanlogo2_azul.png"/>
-        </div>
-
-        <div id="menu">
-             <ul>
-               <li onclick="location.href='client.php';"><img src="images/clientes.png"/>Clientes</li>
-               <li onclick="location.href='schedule.php';"><img src="images/agenda.png"/>Agenda</li>
-               <li onclick="location.href='orders.php';"><img src="images/pedidos.png"/>Pedidos</li>
-            </ul>               
-        </div>
-    </div>
-
+	<?php
+		include 'general/general.php';
+	?>
+    
 	<div id="modulo2">
 	    <p>Pedidos</p>
 	</div>
@@ -101,6 +83,8 @@
 		</div>
 	</div>
 
+	<link rel="stylesheet" type="text/css" href="orders/orders.css">
 	<script type="text/javascript" src="orders/orders_grid.js"></script>
+
 </body>
 </html>

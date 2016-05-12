@@ -16,7 +16,7 @@
 	?>
 
 	<div id="modulo2">
-	    <p><?php echo "Agenda de vendedores"; ?></p>
+	    <p>Agenda de vendedores</p>
 	</div>
 
 	<div id="modulo3-contenido">
@@ -59,14 +59,14 @@
 
 	<link rel="stylesheet" type="text/css" href="schedule/schedule.css">
 	<script type="text/javascript" src="schedule/schedule.js"></script>
-	
+
 	<script type="text/javascript">
 		$('#sellers-combo').combobox({
 	        url:'sellers/get_sellers.php',
 	        valueField:'id',
 	        textField:'email',
 	        onSelect: populateSchedule
-	    });		
+	    });
 	</script>
 </body>
 </html>
