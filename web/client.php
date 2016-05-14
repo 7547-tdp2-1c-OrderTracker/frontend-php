@@ -30,13 +30,14 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteClient()">Eliminar</a>
 		</div>
 		<table id="dg" class="easyui-datagrid" url="clients/get_clients.php" 
-				toolbar="#toolbar" pagination="true" pageSize="16" pageList="[16,32,48]"
+				toolbar="#toolbar" pagination="true" pageSize="16" pageList="[16,32,48]" loadMsg="Cargando..."
 				rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="name">Nombre</th>
 					<th field="lastname">Apellido</th>
 					<th field="cuil">Cuil</th>
+					<th field="company">Razón Social</th>
 					<th field="address">Dirección</th>
 					<th field="phone_number">Teléfono</th>
 					<th field="email">Email</th>
@@ -45,21 +46,25 @@
 			</thead>
 		</table>
 		
-		<div id="dlg" class="easyui-dialog" style="width:740px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons">
 			<div class="ftitle">Cliente</div>
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">
 						<label>Nombre:</label>
-						<input name="name" class="easyui-textbox">
+						<input name="name" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
 					</div>
 					<div class="fitem">
 						<label>Apellido:</label>
-						<input name="lastname" class="easyui-textbox">
+						<input name="lastname" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
 					</div>
 					<div class="fitem">
 						<label>Cuil:</label>
 						<input name="cuil" class="easyui-textbox">
+					</div>
+					<div class="fitem">
+						<label>Razón Social:</label>
+						<input name="company" class="easyui-textbox">
 					</div>
 		   			<div class="fitem">
 						<label>Teléfono:</label>
@@ -67,29 +72,32 @@
 					</div>
 					<div class="fitem">
 						<label>Email:</label>
-						<input name="email" class="easyui-textbox" validType="email">
+						<input name="email" class="easyui-textbox" required="required" validType="email" missingMessage="Campo obligatorio" invalidMessage="Ingrese un email válido">
 					</div>
 					<div class="fitem">
 						<label>Tipo:</label>
-						<input name="sellerType" class="easyui-textbox">
+					    <select name="sellerType" class="easyui-combobox" required="required" missingMessage="Campo obligatorio" editable="false" style="width: 182.533px;">
+					        <option>retail</option>
+					        <option>whole sale</option>
+					    </select>
 					</div>
 					<div class="fitem">
-						<label>Avatar:</label>
-						<input name="avatar" class="easyui-textbox">
-					</div>
-					<div class="fitem">
-						<label>Thumbnail:</label>
-						<input name="thumbnail" class="easyui-textbox">
+						<label>Avatar URL:</label>
+						<input name="avatar" type="text" class="easyuibtn">
 					</div>
 		    		<input type="hidden" name="lat" value="">
 		    		<input type="hidden" name="lon" value="">
+		    		<div id="images-container">
+		    			<img id="avatarImg" class="image"/>
+		    			<img id="qrImg" class="image"/>
+		    		</div>
 	    		</div>
 	    		<div id="map-container">
 	    			<div class="fitem">
 						<label>Dirección:</label>
-						<input name="address" type="text" class="addrbtn">
+						<input name="address" type="text" class="easyuibtn">
 					</div>
-		    		<div id="map" style="width: 300px; height: 300px;"></div>
+		    		<div id="map"></div>
 				</div>
 			</form>
 		</div>

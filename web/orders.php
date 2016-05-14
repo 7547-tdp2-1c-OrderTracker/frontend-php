@@ -24,7 +24,7 @@
 	<div id="modulo3-contenido">
 		<div id="toolbar">
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editOrder()">Editar</a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancellOrder()">Cancelar</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelOrder()">Cancelar</a>
 		</div>
 		<table id="dg" class="easyui-datagrid" url="orders/get_orders.php" 
 				toolbar="#toolbar" pagination="true" pageSize="16" pageList="[16,32,48]"

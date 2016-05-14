@@ -4,6 +4,8 @@ function newClient() {
 	updateMap();
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Cliente');
 	$('#fm').form('clear');
+	setImage("avatarImg", "");
+	setImage("qrImg", "");
 	url = 'clients/create_client.php';
 }
 
@@ -13,6 +15,8 @@ function editClient() {
 		updateMap(new google.maps.LatLng(row.lat, row.lon));
 		$('#dlg').dialog('open').dialog('setTitle','Editar Cliente');
 		$('#fm').form('load',row);
+		setImage("avatarImg", row.avatar);
+		setImage("qrImg", "http://www.barcodes4.me/barcode/qr/qr.png?value="+row.id+"&size=6&ecclevel=0");
 		url = 'clients/edit_client.php?id='+row.id;
 	}
 }
@@ -57,3 +61,22 @@ function deleteClient() {
 		});
 	}
 }
+
+$("[name='avatar']").bind('change', function(e) {
+	setImage("avatarImg", $(this).val());
+});
+
+$("#avatarImg").error(function() {
+    $(this).attr("src", "images/noimage.png");
+    $("[name='avatar']").css("background-color", "#fff3f3");
+});
+
+function setImage(image, src) {
+	if(!src || src.length === 0) {
+		src = "images/noimage.png";
+	}
+
+	$("#"+image).attr("src", src);
+	$("[name='avatar']").css("background-color", "white");
+}
+
