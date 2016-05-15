@@ -40,6 +40,7 @@
 #form-container{
 	margin: 0 40px 0 0;
 	float:left;
+	width: 280px;
 }
 #images-container{
 	margin-top: 24px;

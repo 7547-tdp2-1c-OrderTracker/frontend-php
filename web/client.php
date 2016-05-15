@@ -30,8 +30,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteClient()">Eliminar</a>
 		</div>
 		<table id="dg" class="easyui-datagrid" url="clients/get_clients.php" 
-				toolbar="#toolbar" pagination="true" pageSize="16" pageList="[16,32,48]" loadMsg="Cargando..."
-				rownumbers="true" fitColumns="true" singleSelect="true">
+				toolbar="#toolbar" pagination="true" pageSize="20" loadMsg="Cargando..." rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="name">Nombre</th>
@@ -64,7 +63,7 @@
 					</div>
 					<div class="fitem">
 						<label>Razón Social:</label>
-						<input name="company" class="easyui-textbox">
+						<input name="company" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
 					</div>
 		   			<div class="fitem">
 						<label>Teléfono:</label>
@@ -77,8 +76,8 @@
 					<div class="fitem">
 						<label>Tipo:</label>
 					    <select name="sellerType" class="easyui-combobox" required="required" missingMessage="Campo obligatorio" editable="false" style="width: 182.533px;">
-					        <option>retail</option>
-					        <option>whole sale</option>
+					        <option>minorista</option>
+					        <option>mayorista</option>
 					    </select>
 					</div>
 					<div class="fitem">
