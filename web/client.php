@@ -77,8 +77,8 @@
 					<div class="fitem">
 						<label>Tipo:</label>
 					    <select name="sellerType" class="easyui-combobox" required="required" missingMessage="Campo obligatorio" editable="false" style="width: 182.533px;">
-					        <option>minorista</option>
-					        <option>mayorista</option>
+					        <option value="retail">Minorista</option>
+					        <option value="wholesale">Mayorista</option>
 					    </select>
 					</div>
 					<div class="fitem">
