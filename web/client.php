@@ -41,7 +41,7 @@
 					<th field="address">Dirección</th>
 					<th field="phone_number">Teléfono</th>
 					<th field="email">Email</th>
-					<th field="sellerType">Tipo</th>
+					<th field="sellerType" formatter="formatSellerType">Tipo</th>
 				</tr>
 			</thead>
 		</table>
