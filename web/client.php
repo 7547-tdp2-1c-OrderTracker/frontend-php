@@ -33,6 +33,7 @@
 				toolbar="#toolbar" pagination="true" pageSize="20" loadMsg="Cargando..." rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
+					<th field="id">Id</th>
 					<th field="name">Nombre</th>
 					<th field="lastname">Apellido</th>
 					<th field="cuil">Cuil</th>
