@@ -80,3 +80,8 @@ function setImage(image, src) {
 	$("[name='avatar']").css("background-color", "white");
 }
 
+function formatSellerType(str) {
+	if (str === "wholesale") return "Mayorista";
+	if (str === "retail") return "Minorista";
+	return "-";
+}
