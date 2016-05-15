@@ -56,3 +56,8 @@
 	height:400px;
 	max-height:400px;
 }
+#sellers{
+	padding: 10px 0 10px 215px;
+	background: #ccc;
+	margin-bottom: 20px;
+}

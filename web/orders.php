@@ -1,16 +1,13 @@
 <html>
 <head>
 	<title>Trackerman - Pedidos</title>
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
-	<script type="text/javascript" src="lib/fn.js"></script>
-	<script type="text/javascript" src="lib/moment.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
-	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
 	<?php
+		include 'general/easyui_header.php';
 		include 'general/header.php';
 	?>
+	<script type="text/javascript" src="lib/fn.js"></script>
+	<script type="text/javascript" src="lib/moment.js"></script>
+	<script type="text/javascript" src="lib/datagrid-filter.js"></script>
 </head>
 <body>
 	<?php
@@ -23,27 +20,24 @@
 
 	<div id="modulo3-contenido">
 		<div id="toolbar">
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editOrder()">Editar</a>
-			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="cancelOrder()">Cancelar</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="orderDetail()">Ver detalle</a>
 		</div>
-		<table id="dg" class="easyui-datagrid" url="orders/get_orders.php" 
-				toolbar="#toolbar" pagination="true" pageSize="16" pageList="[16,32,48]"
-				rownumbers="true" fitColumns="true" singleSelect="true">
+		<table id="dg" rownumbers="true" toolbar="#toolbar" singleSelect="true" url="orders/get_orders.php">
 			<thead>
 				<tr>
-					<th field="id">Nro Orden</th>
-					<th field="client_name">Cliente</th>
-					<th field="total_price">Monto</th>
-					<th field="status">Estado</th>
-					<th field="seller_id">Vendedor</th>
-					<th field="date_created" formatter="formatDate">Fecha Creación</th>
-					<th field="items">Bultos</th>
+					<th data-options="field:'id'">Nro Orden</th>
+					<th data-options="field:'client_name'">Cliente</th>
+					<th data-options="field:'company'">Razón social</th>
+					<th data-options="field:'total_price', width:80, align:'center'" formatter="formatPrice">Monto</th>
+					<th data-options="field:'status', width:80, align:'center'">Estado</th>
+					<th data-options="field:'seller_id', align:'center'">Vendedor</th>
+					<th data-options="field:'date_created', width:120, align:'center'" formatter="formatDate">Fecha Creación</th>
+					<th data-options="field:'items', align:'center'">Bultos</th>
 				</tr>
 			</thead>
 		</table>
-		
-		<div id="dlg" class="easyui-dialog" style="width:700px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
-			<div class="ftitle">Ordern</div>
+	<!-- <div id="dlg" class="easyui-dialog" style="width:700px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+			<div class="ftitle">Orden</div>
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">
@@ -82,9 +76,9 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
 		</div>
 	</div>
-
+ -->
 	<link rel="stylesheet" type="text/css" href="orders/orders.css">
 	<script type="text/javascript" src="orders/orders_grid.js"></script>
-
+	<script type="text/javascript" src="orders/filters.js"></script>
 </body>
 </html>

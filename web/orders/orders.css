@@ -34,3 +34,6 @@
 	margin: 0 40px 0 0;
 	float:left;
 }
+.icon-filter{
+	background:url('../images/filter.png') no-repeat center center;
+}

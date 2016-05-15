@@ -1,18 +1,13 @@
 <html>
 <head>
 	<title>Trackerman - Clientes</title>
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/themes/color.css">
-	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.com/easyui/demo/demo.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
-	<script type="text/javascript" src="http://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+	<?php
+		include 'general/easyui_header.php';
+		include 'general/header.php';
+	?>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script type="text/javascript" src="lib/fn.js"></script>
 	<link rel="stylesheet" type="text/css" href="clients/client.css">
-	<?php
-		include 'general/header.php';
-	?>
 </head>
 <body>
 	<?php
@@ -52,11 +47,11 @@
 				<div id="form-container">
 					<div class="fitem">
 						<label>Nombre:</label>
-						<input name="name" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
+						<input name="name" class="easyui-textbox" required="required">
 					</div>
 					<div class="fitem">
 						<label>Apellido:</label>
-						<input name="lastname" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
+						<input name="lastname" class="easyui-textbox" required="required">
 					</div>
 					<div class="fitem">
 						<label>Cuil:</label>
@@ -64,7 +59,7 @@
 					</div>
 					<div class="fitem">
 						<label>Razón Social:</label>
-						<input name="company" class="easyui-textbox" required="required" missingMessage="Campo obligatorio">
+						<input name="company" class="easyui-textbox" required="required">
 					</div>
 		   			<div class="fitem">
 						<label>Teléfono:</label>
@@ -72,11 +67,11 @@
 					</div>
 					<div class="fitem">
 						<label>Email:</label>
-						<input name="email" class="easyui-textbox" required="required" validType="email" missingMessage="Campo obligatorio" invalidMessage="Ingrese un email válido">
+						<input name="email" class="easyui-textbox" required="required" validType="email">
 					</div>
 					<div class="fitem">
 						<label>Tipo:</label>
-					    <select name="sellerType" class="easyui-combobox" required="required" missingMessage="Campo obligatorio" editable="false" style="width: 182.533px;">
+					    <select name="sellerType" class="easyui-combobox" required="required" editable="false" style="width: 182.533px;">
 					        <option value="retail">Minorista</option>
 					        <option value="wholesale">Mayorista</option>
 					    </select>

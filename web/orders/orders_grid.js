@@ -1,3 +1,8 @@
-function formatDate(str) {
-	return moment(str).format('DD/MM/YYYY HH:mm');
+function formatPrice(val, row) {
+    return val;  // si se cambia rompe el filtro
+}
+
+function formatDate(date) {
+	return moment(date).format('DD/MM/YYYY');
 };
+
