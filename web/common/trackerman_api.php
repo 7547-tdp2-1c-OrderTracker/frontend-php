@@ -118,12 +118,14 @@
 		static function createDiscount($body) {
 			if ($body["product_id"] == "") unset($body["product_id"]);
 			if ($body["brand_id"] == "") unset($body["brand_id"]);
+			if ($body["min_quantity"] == "") unset($body["min_quantity"]);
 			return postJSON(self::$baseUrl."/v1/promotions", $body);
 		}
 
 		static function editDiscount($id, $body) {
 			if ($body["product_id"] == "") unset($body["product_id"]);
 			if ($body["brand_id"] == "") unset($body["brand_id"]);
+			if ($body["min_quantity"] == "") unset($body["min_quantity"]);
 			return putJSON(self::$baseUrl."/v1/promotions/".$id, $body);
 		}
 
