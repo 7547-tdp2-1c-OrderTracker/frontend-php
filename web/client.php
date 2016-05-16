@@ -25,7 +25,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteClient()">Eliminar</a>
 		</div>
 		<table id="dg" class="easyui-datagrid" url="clients/get_clients.php" 
-				toolbar="#toolbar" pagination="true" pageSize="20" loadMsg="Cargando..." rownumbers="true" fitColumns="true" singleSelect="true">
+				toolbar="#toolbar" pagination="true" pageSize="20" rownumbers="true" fitColumns="true" singleSelect="true">
 			<thead>
 				<tr>
 					<th field="id">Id</th>

@@ -6,7 +6,6 @@
 		include 'general/header.php';
 	?>
 	<script type="text/javascript" src="lib/fn.js"></script>
-	<script type="text/javascript" src="lib/moment.js"></script>
 	<script type="text/javascript" src="lib/datagrid-filter.js"></script>
 </head>
 <body>

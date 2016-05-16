@@ -41,6 +41,24 @@
 			return getJSON(self::$baseUrl."/v1/sellers", $vars);
 		}
 
+		// MARCAS
+
+		static function listBrands($limit, $offset) {
+			$vars['limit'] = $limit;
+			$vars['offset'] = $offset;
+
+			return getJSON(self::$baseUrl."/v1/brands", $vars);
+		}
+
+		// PRODUCTOS
+
+		static function listProducts($limit, $offset) {
+			$vars['limit'] = $limit;
+			$vars['offset'] = $offset;
+
+			return getJSON(self::$baseUrl."/v1/products", $vars);
+		}		
+
 		// AGENDA
 
 		static function listScheduleEntries($seller) {
@@ -87,5 +105,26 @@
 		static function editOrder($id, $body) {
 			return putJSON(self::$baseUrl."/v1/orders/".$id, $body);
 		}
+
+		// DESCUENTOS
 	
+		static function listDiscounts($limit, $offset) {
+			$vars['limit'] = $limit;
+			$vars['offset'] = $offset;
+
+			return getJSON(self::$baseUrl."/v1/promotions", $vars);
+		}
+
+		static function createDiscount($body) {
+			return postJSON(self::$baseUrl."/v1/promotions", $body);
+		}
+
+		static function editDiscount($id, $body) {
+			return putJSON(self::$baseUrl."/v1/promotions/".$id, $body);
+		}
+
+		static function deleteDiscount($id) {
+			return deleteJSON(self::$baseUrl."/v1/promotions/".$id);
+		}
+
 	}
