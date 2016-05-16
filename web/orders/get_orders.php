@@ -8,6 +8,7 @@
 	$json = TrackermanAPI::listOrders($limit, $offset);
 	
 	foreach ($json["results"] as &$valor) {
+		$valor["client_id"] = $valor["client"]["id"];
     	$valor["client_name"] = $valor["client"]["lastname"].", ".$valor["client"]["name"];
     	$valor["company"] = $valor["client"]["company"];
     	$valor["items"] = count($valor["order_items"]);

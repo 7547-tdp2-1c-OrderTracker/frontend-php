@@ -24,12 +24,13 @@
 		<table id="dg" rownumbers="true" toolbar="#toolbar" singleSelect="true" url="orders/get_orders.php">
 			<thead>
 				<tr>
-					<th data-options="field:'id'">Nro Orden</th>
+					<th data-options="field:'id'">Nro Pedido</th>
+					<th data-options="field:'client_id'">Cód. Cliente</th>
 					<th data-options="field:'client_name'">Cliente</th>
 					<th data-options="field:'company'">Razón social</th>
 					<th data-options="field:'total_price', width:80, align:'center'" formatter="formatPrice">Monto</th>
 					<th data-options="field:'status', width:80, align:'center'">Estado</th>
-					<th data-options="field:'seller_id', align:'center'">Vendedor</th>
+					<th data-options="field:'seller_id', align:'center'">Cód. Vendedor</th>
 					<th data-options="field:'date_created', width:120, align:'center'" formatter="formatDate">Fecha Creación</th>
 					<th data-options="field:'items', align:'center'">Bultos</th>
 				</tr>
@@ -40,8 +41,12 @@
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">
-						<label>Nro de Pedido:</label>
+						<label>Nro Pedido:</label>
 						<p name="id" class="easyui-textbox" editable="false"></p>
+					</div>
+					<div class="fitem">
+						<label>Cód. Cliente:</label>
+						<p name="client_id" class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
 						<label>Cliente:</label>
@@ -67,7 +72,7 @@
 					    </select>
 					</div>
 					<div class="fitem">
-						<label>Vendedor:</label>
+						<label>Cód. Vendedor:</label>
 						<p name='seller_id' class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
