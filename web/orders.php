@@ -29,7 +29,7 @@
 					<th data-options="field:'client_name'">Cliente</th>
 					<th data-options="field:'company'">Razón social</th>
 					<th data-options="field:'total_price', width:80, align:'center'" formatter="formatPrice">Monto</th>
-					<th data-options="field:'status', width:80, align:'center'">Estado</th>
+					<th data-options="field:'status', width:80, align:'center'" formatter="formatState">Estado</th>
 					<th data-options="field:'seller_id', align:'center'">Cód. Vendedor</th>
 					<th data-options="field:'date_created', width:120, align:'center'" formatter="formatDate">Fecha Creación</th>
 					<th data-options="field:'items', align:'center'">Bultos</th>

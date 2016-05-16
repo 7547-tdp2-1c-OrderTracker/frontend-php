@@ -48,3 +48,14 @@ function saveOrder() {
 function formatPrice(val, row) {
     return val;  // si se cambia rompe el filtro
 }
+
+function formatState(val) {
+	if (val === "draft") return "Borrador";
+	if (val === "cancelled") return "Cancelado";
+	if (val === "confirmed") return "Confirmado";
+	if (val === "delivered") return "Entregado";
+	if (val === "intransit") return "En Transito";
+	if (val === "prepared") return "Preparado";
+	
+    return val;
+}
