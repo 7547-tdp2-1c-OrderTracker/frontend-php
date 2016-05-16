@@ -31,6 +31,7 @@
 					<th data-options="field:'total_price', width:80, align:'center'" formatter="formatPrice">Monto</th>
 					<th data-options="field:'status', width:80, align:'center'" formatter="formatState">Estado</th>
 					<th data-options="field:'seller_id', align:'center'">Cód. Vendedor</th>
+					<th data-options="field:'seller_name'">Vendedor</th>
 					<th data-options="field:'date_created', width:120, align:'center'" formatter="formatDate">Fecha Creación</th>
 					<th data-options="field:'items', align:'center'">Bultos</th>
 				</tr>
@@ -76,13 +77,17 @@
 						<p name='seller_id' class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
+						<label>Vendedor:</label>
+						<p name="seller_name" class="easyui-textbox" editable="false"></p>
+					</div>
+					<div class="fitem">
 						<label>Fecha creación:</label>
 						<p name='date_created' class="easyui-textbox" editable="false" formatter="formatDate"></p>
 					</div>
 
 	    		</div>
 	    		<div id="prods-container">
-					<table id="products" style="width: 450px; height: 200px;" rownumbers="true" singleSelect="true"></table>
+					<table id="products" style="width: 450px; height: 280px;" rownumbers="true" singleSelect="true"></table>
 	    		</div>
 			</form>
 		</div>
