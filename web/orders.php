@@ -36,38 +36,49 @@
 				</tr>
 			</thead>
 		</table>
-	<!-- <div id="dlg" class="easyui-dialog" style="width:700px;height:500px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
-			<div class="ftitle">Orden</div>
+	<div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons">
+		<div class="ftitle">Pedido</div>
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">
-						<label>Nro Pedido:</label>
-						<p name="id"></p>
+						<label>Nro de Pedido:</label>
+						<p name="id" class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
 						<label>Cliente:</label>
-						<p name="client"></p>
+						<p name="client_name" class="easyui-textbox" editable="false"></p>
+					</div>
+					<div class="fitem">
+						<label>Razón social:</label>
+						<p name="company" class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
 						<label>Monto:</label>
-						<p name="total_price"></p>
+						<p name="total_price" class="easyui-textbox" editable="false"></p>
 					</div>
 		   			<div class="fitem">
 						<label>Estado:</label>
-						<input name="status" class="easyui-textbox" />
+						<select name="status" class="easyui-combobox" editable="false" style="width: 121.533px;">
+					        <option value="draft">Borrador</option>
+					        <option value="confirmed">Confirmado</option>
+					        <option value="cancelled">Cancelado</option>
+					        <option value="intransit">En camino</option>
+					        <option value="delivered">Entregado</option>
+					        <option value="prepared">Preparado</option>
+					    </select>
 					</div>
 					<div class="fitem">
 						<label>Vendedor:</label>
-						<p name='seller_id'></p>
+						<p name='seller_id' class="easyui-textbox" editable="false"></p>
 					</div>
 					<div class="fitem">
 						<label>Fecha creación:</label>
-						<p name='date_created'></p>
+						<p name='date_created' class="easyui-textbox" editable="false" formatter="formatDate"></p>
 					</div>
-					<div class="fitem">
-						<label>Productos:</label>
-						<input name="avatar" class="easyui-textbox">
-					</div>
+
+	    		</div>
+	    		<div id="prods-container">
+					<table id="products" style="width: 450px; height: 200px;" rownumbers="true" singleSelect="true"></table>
 	    		</div>
 			</form>
 		</div>
@@ -76,7 +87,7 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
 		</div>
 	</div>
- -->
+ 
 	<link rel="stylesheet" type="text/css" href="orders/orders.css">
 	<script type="text/javascript" src="orders/orders_grid.js"></script>
 	<script type="text/javascript" src="orders/filters.js"></script>

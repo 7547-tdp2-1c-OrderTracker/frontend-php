@@ -73,11 +73,19 @@
 
 		// PEDIDOS
 
+		static function getOrder($id) {
+			return getJSON(self::$baseUrl."/v1/orders/".$id, []);
+		}
+
 		static function listOrders($limit, $offset) {
 			$vars['limit'] = $limit;
 			$vars['offset'] = $offset;
 
 			return getJSON(self::$baseUrl."/v1/orders", $vars);
+		}
+
+		static function editOrder($id, $body) {
+			return putJSON(self::$baseUrl."/v1/orders/".$id, $body);
 		}
 	
 	}
