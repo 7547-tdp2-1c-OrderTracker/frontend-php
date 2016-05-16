@@ -116,10 +116,14 @@
 		}
 
 		static function createDiscount($body) {
+			if ($body["product_id"] == "") unset($body["product_id"]);
+			if ($body["brand_id"] == "") unset($body["brand_id"]);
 			return postJSON(self::$baseUrl."/v1/promotions", $body);
 		}
 
 		static function editDiscount($id, $body) {
+			if ($body["product_id"] == "") unset($body["product_id"]);
+			if ($body["brand_id"] == "") unset($body["brand_id"]);
 			return putJSON(self::$baseUrl."/v1/promotions/".$id, $body);
 		}
 
