@@ -32,7 +32,7 @@
 			</thead>
 		</table>
 		
-		<div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons">
+		<div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons" width="400" height="400">
 			<div class="ftitle">marca</div>
 			<form class="brand-form" id="fm" method="post" novalidate>
 				<div id="form-container">
