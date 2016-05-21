@@ -1,5 +1,15 @@
 var url;
 
+function formatRestriction(entity, row) {
+	if (row.product) {
+		return "Producto: " + row.product.name;
+	} else if (row.brand) {
+		return "Marca: " + row.brand.name;
+	} else {
+		return "";
+	}
+}
+
 function newDiscount() {
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Descuento');
 	$('#fm').form('clear');

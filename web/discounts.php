@@ -30,8 +30,7 @@
 					<th field="percent">Porcentaje</th>
 					<th field="begin_date" formatter="formatDate">Desde</th>
 					<th field="end_date" formatter="formatDate">Hasta</th>
-					<th field="product_id">Producto</th>
-					<th field="brand_id">Marca</th>
+					<th field="product_id" formatter="formatRestriction">Restriccion</th>
 					<th field="min_quantity">Cantidad Mínima</th>
 				</tr>
 			</thead>
