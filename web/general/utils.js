@@ -5,7 +5,6 @@ function formatDate(date) {
 //si hay un resize de pantalla, disparo evento cada medio segundo
 var $element = $(window), lastWidth = $element.width(), lastHeight = $element.height();
 function checkForChanges(){
-	console.log('Matu ejecutando el check4Changes');
 	if ($element.width() != lastWidth||$element.height()!=lastHeight){
 		gridResize()
 	}
@@ -14,14 +13,13 @@ function checkForChanges(){
 checkForChanges();
 
 function gridResize() {
-	console.log('Matu Resizing');
 	var dg = $('#dg');
 	if (dg != undefined) {
 		dg.datagrid('resize');
 	}
 	//haciendo cuentas..
 	var datagrid = $(".datagrid-view")
-	if (datagrid != undefined) {
+	if (datagrid != undefined && datagrid.length > 0) {
 		datagrid[0].style.height = $(window).height() - $('.datagrid-view').offset().top - 31+'px';
 	}
 	lastWidth = $element.width();

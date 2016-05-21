@@ -14,12 +14,12 @@
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawTop10Sellers);
 
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
+      function drawTop10Sellers() {
 
         // Create the data table.
         var data = new google.visualization.DataTable();
@@ -35,11 +35,12 @@
 
         // Set chart options
         var options = {'title':'Top 10 vendedores 2016',
+                       'is3D': true,
                        'width':400,
                        'height':300};
 
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('top10chart'));
         chart.draw(data, options);
       }
     </script>
@@ -53,6 +54,6 @@
 	    <p>Reportes</p>
 	</div>
 
-	<div id="chart_div" style="padding-left: 200px;"></div>
+	<div id="top10chart" style="padding: 15 0 0 200;border: 1px solid #ccc;"></div>
 </body>
 </html>
