@@ -85,3 +85,9 @@ function formatSellerType(str) {
 	if (str === "retail") return "Minorista";
 	return "-";
 }
+
+$('#dg').datagrid({
+	onLoadSuccess: function(data){
+		gridResize();
+	}
+});

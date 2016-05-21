@@ -98,3 +98,9 @@ $('#brands-combo').combobox({
     	$("[name='brand_id']").val(brand.id);
     }
 });
+
+$('#dg').datagrid({
+	onLoadSuccess: function(data){
+		gridResize();
+	}
+});

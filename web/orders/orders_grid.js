@@ -59,3 +59,9 @@ function formatState(val) {
 	
     return val;
 }
+
+$('#dg').datagrid({
+	onLoadSuccess: function(data){
+		gridResize();
+	}
+});
