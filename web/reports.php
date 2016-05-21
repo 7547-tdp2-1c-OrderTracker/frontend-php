@@ -8,7 +8,7 @@
 
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+    <script type="text/javascript" src="lib/jquery.min.js"></script>    
     <script type="text/javascript">
 
 		// Load the Visualization API and the corechart package.
@@ -18,35 +18,34 @@
 		google.charts.setOnLoadCallback(drawMonthSalesComparison);
 		google.charts.setOnLoadCallback(drawTop10Sellers);
 		
+    // guardar la referencia a ajax porque la pisa mas adelante el otro include de jquery
+    var ajax = $.ajax.bind($);
 
-		// Callback that creates and populates a data table,
-		// instantiates the pie chart, passes in the data and
-		// draws it.
 		function drawTop10Sellers() {
+      ajax(window.apiBaseUrl + "/v1/report/sellers/top10")
+        .then(function(response) {
+    			// Create the data table.
+    			var data = new google.visualization.DataTable();
+    			data.addColumn('string', 'Topping');
+    			data.addColumn('number', 'Slices');
+    			data.addRows(response.top10.map(function(seller) {
+            return [seller.name, seller.total]
+          }));
 
-			// Create the data table.
-			var data = new google.visualization.DataTable();
-			data.addColumn('string', 'Topping');
-			data.addColumn('number', 'Slices');
-			data.addRows([
-				['darios3@gmail.com', 100],
-				['guido321@gmail.com', 50],
-				['damian.arias@gmail.com', 10],
-				['liomessi@gmail.com', 200],
-				['smpiano@gmail.com', 15]
-			]);
+    			// Set chart options
+    			var options = {
+    				'title':'Top 10 vendedores ' + response.year,
+    				'is3D': true,
+    				'width':400,
+    				'height':300
+    			};
 
-			// Set chart options
-			var options = {
-				'title':'Top 10 vendedores 2016',
-				'is3D': true,
-				'width':400,
-				'height':300
-			};
+    			// Instantiate and draw our chart, passing in some options.
+    			var chart = new google.visualization.PieChart(document.getElementById('top10chart'));
+    			chart.draw(data, options);
+        });
 
-			// Instantiate and draw our chart, passing in some options.
-			var chart = new google.visualization.PieChart(document.getElementById('top10chart'));
-			chart.draw(data, options);
+
 		}
 
 
