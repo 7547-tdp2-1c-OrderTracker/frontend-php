@@ -4,6 +4,10 @@
 	class TrackermanAPI {
 		private static $baseUrl = "https://trackerman-api.herokuapp.com";
 
+		static function getBaseUrl() {
+			return self::$baseUrl;
+		}
+
 		// CLIENTES
 
 		static function getClient($id) {
@@ -134,3 +138,4 @@
 		}
 
 	}
+?>
