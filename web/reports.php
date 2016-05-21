@@ -14,15 +14,30 @@
 		// Load the Visualization API and the corechart package.
 		google.charts.load('current', {'packages':['corechart', 'bar']});
 
+
+
+    function refreshCharts() {
+      drawTop10Sellers();
+      drawMonthSalesComparison();
+    };
+
 		// Set a callback to run when the Google Visualization API is loaded.
-		google.charts.setOnLoadCallback(drawMonthSalesComparison);
-		google.charts.setOnLoadCallback(drawTop10Sellers);
+		google.charts.setOnLoadCallback(refreshCharts);
 		
     // guardar la referencia a ajax porque la pisa mas adelante el otro include de jquery
     var ajax = $.ajax.bind($);
 
 		function drawTop10Sellers() {
-      ajax(window.apiBaseUrl + "/v1/report/sellers/top10")
+      var year = $("input[name=dateFilter]").val().split("/")[1];
+      var url;
+
+      if (year) {
+        url = window.apiBaseUrl + "/v1/report/sellers/top10?year=" + year;
+      } else {
+        url = window.apiBaseUrl + "/v1/report/sellers/top10";
+      }
+
+      ajax(url)
         .then(function(response) {
     			// Create the data table.
     			var data = new google.visualization.DataTable();
@@ -170,6 +185,7 @@
 							$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
 
 							$('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+              refreshCharts();
 						}
 					},
 					beforeShow : function(input, inst) {
