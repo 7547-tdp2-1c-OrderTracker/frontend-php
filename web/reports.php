@@ -14,13 +14,13 @@
 		// Load the Visualization API and the corechart package.
 		google.charts.load('current', {'packages':['corechart', 'bar']});
 
-
-
 		function refreshCharts() {
 			//cambia el año
 			drawTop10Sellers();
 			//cambia el mes y año y vendedor
 			drawMonthSalesComparison();
+			//cambia el mes y año
+			drawTopBrands();
 		};
 
 		// Set a callback to run when the Google Visualization API is loaded.
@@ -30,7 +30,7 @@
 		var ajax = $.ajax.bind($);
 
 		function drawTop10Sellers() {
-			var year = $("input[name=dateFilter]").val().split("/")[1];
+			var year = getDatePickerInfo().currentYear;
 			var url = window.apiBaseUrl + "/v1/report/sellers/top10";
 			if (year) {
 				url += "?year=" + year;
@@ -59,22 +59,54 @@
         	});
 		}
 
-
-		function drawMonthSalesComparison() {
-			var mmYyyy = $("input[name=dateFilter]").val();
-			if ($("input[name=dateFilter]").val().match(/[0-9]{2}\/[0-9]{4}/) == null) {
+		function getDatePickerInfo() {
+			var mmYyyy = $("input[name=datepicker]").val();
+			if (mmYyyy.match(/[0-9]{2}\/[0-9]{4}/) == null) {
 				mmYyyy = $.datepicker.formatDate( "mm/yy", new Date() );
 			}
 			var dates = mmYyyy.split("/");
-			var currentMonth = dates[0];
-			var currentYear = dates[1];
+			return {currentMonth: dates[0], currentYear: dates[1]};
+		}
+
+		function drawTopBrands() {
+			var picked = getDatePickerInfo();
+			var url = window.apiBaseUrl + "/v1/report/brandsSales?date="+picked.currentMonth+'-'+picked.currentYear;
+			ajax(url).then(function(response) {
+				var data = new google.visualization.DataTable();
+				data.addColumn('string', 'Topping');
+				data.addColumn('number', 'Slices');
+				data.addRows(response.report.map(function(report) {
+					return [report.brand.name, report.total_amount];
+				}));
+
+				var options = {
+					title: 'Top de Marcas más vendidas. sobre el mes seleccionado ('+$.datepicker.formatDate( "MM", new Date( picked.currentYear, picked.currentMonth - 1, 1 ))+').',
+					pieSliceText: 'label',
+					pieHole: 0.4,
+					width: 500,
+					height: 300	
+				};
+
+				var chart = new google.visualization.PieChart(document.getElementById('topBrands'));
+				chart.draw(data, options);
+			});
+		}
+
+		function drawMonthSalesComparison() {
+			var picked = getDatePickerInfo();
+			var currentMonth = picked.currentMonth;
+			var currentYear = picked.currentYear;
 			var pastYear = (currentYear - 1).toString();
 
 
 			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+currentMonth+'-'+currentYear;
 			var seller = $("select[id=sellers-combo]").val();
+
+			var customTitle = 'Ventas del mes en curso ('+$.datepicker.formatDate( "MM", new Date( currentYear, currentMonth - 1, 1 ))+') en comparación con el año anterior'
+
 			if (seller != null && seller.match(/[0-9]{1,}/) != null) {
 				url += "&seller_id="+seller;
+				customTitle += ' del Vendedor '+$("#sellers-combo option:selected").text();
 			}
 
 			ajax(url).then(function(response) {
@@ -83,9 +115,11 @@
 					['Ventas', response.report[1].amount, response.report[0].amount]
 				]);
 
+				
+
 				var options = {
 					chart: {
-						title: 'Ventas del mes en curso ('+$.datepicker.formatDate( "MM", new Date( currentYear, currentMonth - 1, 1 ))+') en comparación con el año anterior',
+						title: customTitle,
 						subtitle: $.datepicker.formatDate( "MM yy", new Date( currentYear, currentMonth - 1, 1 )) + ' '+response.currency+' '+ response.report[0].amount
 					},
 					hAxis: {
@@ -156,7 +190,7 @@
 	</div>
 
 	<div id="modulo3-contenido">
-		<div class="report-subtitle">Filters</div>
+		<div class="report-subtitle">Filtros</div>
 		<div id="filters">
 			<div id="sellersFilter" class="inline">
 				<label for="seller">Seleccione un vendedor:</label>
@@ -164,13 +198,14 @@
 		    </div>
 		    <div id="dateFilter" class="inline">
 			    <label for="dateFilter">Mes y Año:</label>
-	    		<input name="dateFilter" id="dateFilter" class="date-picker" />
+	    		<input name="datepicker" id="datepicker" class="date-picker" />
 		    </div>
 		</div>
 
 		<div class="report-subtitle" style="padding-top:50px;">Gráficos</div>
 		<div id="monthSalesComparison" class="report-chart"></div>
-		<div id="top10chart" class="report-chart"></div>
+		<div id="topBrands" class="report-chart inline" style="padding-left:inherit"></div>
+		<div id="top10chart" class="report-chart" style="padding-left:800px"></div>
 
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
@@ -196,7 +231,7 @@
 						if (isDonePressed()){
 							var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 							var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-							$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+							$(this).datepicker('setDate', new Date(year, month, 1));
 
 							$('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
               				refreshCharts();

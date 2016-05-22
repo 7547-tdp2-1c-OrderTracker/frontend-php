@@ -9,7 +9,7 @@ $(window).resize(gridResize)
 
 function gridResize() {
 	var dg = $('#dg');
-	if (dg != undefined) {
+	if (dg != undefined && dg.datagrid != null) {
 		dg.datagrid('resize');
 	}
 	//haciendo cuentas..
