@@ -71,6 +71,14 @@
 		function drawTopBrands() {
 			var picked = getDatePickerInfo();
 			var url = window.apiBaseUrl + "/v1/report/brandsSales?date="+picked.currentMonth+'-'+picked.currentYear;
+
+			var seller = $("#sellers-combo").val();
+			var customTitle = 'Top de Marcas más vendidas. sobre el mes seleccionado ('+$.datepicker.formatDate( "MM", new Date( picked.currentYear, picked.currentMonth - 1, 1 ))+')'
+			if (seller != null && seller.match(/[0-9]{1,}/) != null) {
+				url += "&seller_id="+seller;
+				customTitle += ' de '+$("#sellers-combo option:selected").text();
+			}
+
 			ajax(url).then(function(response) {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Topping');
@@ -100,13 +108,11 @@
 
 
 			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+currentMonth+'-'+currentYear;
-			var seller = $("select[id=sellers-combo]").val();
-
+			var seller = $("#sellers-combo").val();
 			var customTitle = 'Ventas del mes en curso ('+$.datepicker.formatDate( "MM", new Date( currentYear, currentMonth - 1, 1 ))+') en comparación con el año anterior'
-
 			if (seller != null && seller.match(/[0-9]{1,}/) != null) {
 				url += "&seller_id="+seller;
-				customTitle += ' del Vendedor '+$("#sellers-combo option:selected").text();
+				customTitle += ' de '+$("#sellers-combo option:selected").text();
 			}
 
 			ajax(url).then(function(response) {
@@ -114,8 +120,6 @@
 					['Año', pastYear, currentYear],
 					['Ventas', response.report[1].amount, response.report[0].amount]
 				]);
-
-				
 
 				var options = {
 					chart: {
