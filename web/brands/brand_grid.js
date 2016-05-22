@@ -83,3 +83,9 @@ function setImage(image, src) {
 $("input[name='picture']").bind('change', function(e) {
 	setImage("brandImg", $(this).val());
 });
+
+$('#dg').datagrid({
+	onLoadSuccess: function(data){
+		gridResize();
+	}
+});
