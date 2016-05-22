@@ -172,6 +172,7 @@
     #filters label {
     	font-weight: bold;
     }
+
     .inline {
     	float: left;
     	padding-left: 20px;
@@ -206,7 +207,7 @@
 		    </div>
 		    <div id="dateFilter" class="inline">
 			    <label for="dateFilter">Mes y Año:</label>
-	    		<input name="datepicker" id="datepicker" class="date-picker" />
+	    		<input name="datepicker" id="datepicker" class="date-picker" readonly/>
 		    </div>
 		</div>
 
