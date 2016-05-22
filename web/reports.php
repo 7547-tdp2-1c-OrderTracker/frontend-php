@@ -165,7 +165,7 @@
 		});
 
 		$(function() {
-			$( document ).tooltip();
+			if ($(document).tooltip != null) $(document).tooltip();
 		});
 
     </script>
@@ -182,14 +182,19 @@
     	padding-left: 20px;
     }
     .report-subtitle {
-    	text-decoration: underline;
-    	padding-top: 20px;
-    	padding-bottom: 10px;
     	font-weight: bold;
+    	border-bottom: gray;
+	    border-style: inset;
+	    border-top: transparent;
+	    border-left: transparent;
+	    border-right: transparent;
     }
     .report-chart {
     	padding: 15 0 0 200;
     	border: 1px solid #ccc;
+    }
+    .filter-content {
+    	padding-top: 20px;
     }
 </style>
 </head>
@@ -203,8 +208,8 @@
 	</div>
 
 	<div id="modulo3-contenido">
-		<div class="report-subtitle">Filtros</div>
-		<div id="filters">
+		<div class="report-subtitle filter-content">Filtros</div>
+		<div id="filters" class="filter-content">
 			<div id="sellersFilter" class="inline">
 				<label for="seller">Seleccione un vendedor:</label>
 				<select id="sellers-combo" title="Seleccione un vendedor para poder filtrar por el mismo"></select>
@@ -215,7 +220,7 @@
 		    </div>
 		</div>
 
-		<div class="report-subtitle" style="padding-top:50px;">Gráficos</div>
+		<div class="report-subtitle filter-content" style="padding-top:50px;">Gráficos</div>
 		<div id="monthSalesComparison" class="report-chart"></div>
 		<div id="topBrands" class="report-chart inline" style="padding-left:inherit"></div>
 		<div id="top10chart" class="report-chart" style="padding-left:800px"></div>
@@ -235,25 +240,19 @@
 					changeYear: true,
 					showButtonPanel: true,
 					onClose: function(dateText, inst) {
-
-
 						function isDonePressed(){
 							return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
 						}
-
 						if (isDonePressed()){
 							var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
 							var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 							$(this).datepicker('setDate', new Date(year, month, 1));
-
 							$('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
               				refreshCharts();
 						}
 					},
 					beforeShow : function(input, inst) {
-
 						inst.dpDiv.addClass('month_year_datepicker')
-
 						if ((datestr = $(this).val()).length > 0) {
 							year = datestr.substring(datestr.length-4, datestr.length);
 							month = datestr.substring(0, 2);
@@ -262,7 +261,7 @@
 							$(".ui-datepicker-calendar").hide();
 						}
 					}
-			})
+			});
 		});
 	</script>
 </body>
