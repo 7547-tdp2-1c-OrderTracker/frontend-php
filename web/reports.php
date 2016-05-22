@@ -88,7 +88,7 @@
 				}));
 
 				var options = {
-					title: 'Top de Marcas más vendidas. sobre el mes seleccionado ('+$.datepicker.formatDate( "MM", new Date( picked.currentYear, picked.currentMonth - 1, 1 ))+').',
+					title: customTitle,
 					pieSliceText: 'label',
 					pieHole: 0.4,
 					width: 500,
@@ -160,6 +160,7 @@
 				var selected = $("#sellers-combo option:selected").val()
 				if (selected.match(/[0-9]{1,}/) == null) $('#top10chart').show();
 				else $('#top10chart').hide();
+				drawTopBrands();
 			});
 		});
 
