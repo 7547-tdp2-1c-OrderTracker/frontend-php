@@ -42,7 +42,7 @@
     			data.addColumn('string', 'Topping');
     			data.addColumn('number', 'Slices');
     			data.addRows(response.top10.map(function(seller) {
-					return [seller.lastName+', '+seller.name, seller.total]
+					return [seller.lastname+', '+seller.name, seller.total]
 				}));
 
     			// Set chart options
@@ -73,7 +73,7 @@
 
 			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+mmYyyy;
 			var seller = $("select[id=sellers-combo]").val();
-			if (seller.match(/[0-9]{1,}/) != null) {
+			if (seller != null && seller.match(/[0-9]{1,}/) != null) {
 				url += "&seller="+seller;
 			}
 
@@ -86,13 +86,10 @@
 				var options = {
 					chart: {
 						title: 'Ventas del mes en curso ('+currentMonth+') en comparación con el año anterior',
-						subtitle: 'Comparador de ventas entre 2 años sucesivos'
+						subtitle: $.datepicker.formatDate( "MM yy", new Date( currentYear, currentMonth - 1, 1 )) + ' $ '+ 8008000
 					},
 					hAxis: {
 						title: 'Total Vendido ($)'
-					},
-					vAxis: {
-						title: 'Año'
 					},
 					bars: 'horizontal',
 					series: {
@@ -100,14 +97,13 @@
 						1: {axis: currentYear}
 					},
 					axes: {
-						x: {
-							pastYear: {label: currentMonth/pastYear+' Ventas', side: 'top'},
-							currentYear: {label: currentMonth/currentYear+' Ventas'}
-						}
+						x: {}
 					},
 					width: 500,
 					height: 300
 				};
+				options.axes.x[pastYear] = {label: currentMonth+'/'+pastYear+' Ventas', side: 'top'};
+				options.axes.x[currentYear] = {label: currentMonth+'/'+currentYear+' Ventas'};
 				var material = new google.charts.Bar(document.getElementById('monthSalesComparison'));
 				material.draw(data, options);
 			//});
@@ -178,10 +174,12 @@
 
 	</div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+    <script src="https://cdn.rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-es.js"></script>
 	<script type="text/javascript">
 	    $(function() {
+	    	$.datepicker.setDefaults( $.datepicker.regional[ "es" ] );
 			$('.date-picker').datepicker(
 				{
 					dateFormat: "mm/yy",
