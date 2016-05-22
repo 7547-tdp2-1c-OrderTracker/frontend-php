@@ -16,36 +16,34 @@
 
 
 
-    function refreshCharts() {
-      drawTop10Sellers();
-      drawMonthSalesComparison();
-    };
+		function refreshCharts() {
+			//cambia el año
+			drawTop10Sellers();
+			//cambia el mes y año y vendedor
+			drawMonthSalesComparison();
+		};
 
 		// Set a callback to run when the Google Visualization API is loaded.
 		google.charts.setOnLoadCallback(refreshCharts);
 		
-    // guardar la referencia a ajax porque la pisa mas adelante el otro include de jquery
-    var ajax = $.ajax.bind($);
+		// guardar la referencia a ajax porque la pisa mas adelante el otro include de jquery
+		var ajax = $.ajax.bind($);
 
 		function drawTop10Sellers() {
-      var year = $("input[name=dateFilter]").val().split("/")[1];
-      var url;
+			var year = $("input[name=dateFilter]").val().split("/")[1];
+			var url = window.apiBaseUrl + "/v1/report/sellers/top10";
+			if (year) {
+				url += "?year=" + year;
+			}
 
-      if (year) {
-        url = window.apiBaseUrl + "/v1/report/sellers/top10?year=" + year;
-      } else {
-        url = window.apiBaseUrl + "/v1/report/sellers/top10";
-      }
-
-      ajax(url)
-        .then(function(response) {
+			ajax(url).then(function(response) {
     			// Create the data table.
     			var data = new google.visualization.DataTable();
     			data.addColumn('string', 'Topping');
     			data.addColumn('number', 'Slices');
     			data.addRows(response.top10.map(function(seller) {
-            return [seller.name, seller.total]
-          }));
+					return [seller.lastName+', '+seller.name, seller.total]
+				}));
 
     			// Set chart options
     			var options = {
@@ -58,56 +56,74 @@
     			// Instantiate and draw our chart, passing in some options.
     			var chart = new google.visualization.PieChart(document.getElementById('top10chart'));
     			chart.draw(data, options);
-        });
-
-
+        	});
 		}
 
 
 		function drawMonthSalesComparison() {
-			var data = google.visualization.arrayToDataTable([
-				['Año', '2015', '2016'],
-				['Ventas', 8175000, 8008000]
-			]);
+			var mmYyyy = $("input[name=dateFilter]").val();
+			if ($("input[name=dateFilter]").val().match(/[0-9]{2}\/[0-9]{4}/) == null) {
+				mmYyyy = $.datepicker.formatDate( "mm/yy", new Date() );
+			}
+			var dates = mmYyyy.split("/");
+			var currentMonth = dates[0];
+			var currentYear = dates[1];
+			var pastYear = (currentYear - 1).toString();
 
-			var options = {
-				chart: {
-					title: 'Ventas del mes en curso en comparación con el año anterior',
-					subtitle: 'Comparador de ventas entre 2 años sucesivos'
-				},
-				hAxis: {
-					title: 'Total Vendido ($)'
-				},
-				vAxis: {
-					title: 'Año'
-				},
-				bars: 'horizontal',
-				series: {
-					0: {axis: '2016'},
-					1: {axis: '2015'}
-				},
-				axes: {
-					x: {
-						2015: {label: '05/2015 Ventas', side: 'top'},
-						2016: {label: '05/2016 Ventas'}
-					}
-				},
-				width: 500,
-				height: 300
-			};
-			var material = new google.charts.Bar(document.getElementById('monthSalesComparison'));
-			material.draw(data, options);
+
+			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+mmYyyy;
+			var seller = $("select[id=sellers-combo]").val();
+			if (seller.match(/[0-9]{1,}/) != null) {
+				url += "&seller="+seller;
+			}
+
+			//ajax(url).then(function(response) {
+				var data = google.visualization.arrayToDataTable([
+					['Año', pastYear, currentYear],
+					['Ventas', 8175000, 8008000]
+				]);
+
+				var options = {
+					chart: {
+						title: 'Ventas del mes en curso ('+currentMonth+') en comparación con el año anterior',
+						subtitle: 'Comparador de ventas entre 2 años sucesivos'
+					},
+					hAxis: {
+						title: 'Total Vendido ($)'
+					},
+					vAxis: {
+						title: 'Año'
+					},
+					bars: 'horizontal',
+					series: {
+						0: {axis: pastYear},
+						1: {axis: currentYear}
+					},
+					axes: {
+						x: {
+							pastYear: {label: currentMonth/pastYear+' Ventas', side: 'top'},
+							currentYear: {label: currentMonth/currentYear+' Ventas'}
+						}
+					},
+					width: 500,
+					height: 300
+				};
+				var material = new google.charts.Bar(document.getElementById('monthSalesComparison'));
+				material.draw(data, options);
+			//});
 		}
 
       //-------------------------------------------
 		function populateReport() {
 			console.log('Poluate report');
 		};
-		$('#sellers-combo').combobox({
-			url:'sellers/get_sellers.php',
-			valueField:'id',
-			textField:'email',
-			onSelect: populateReport()
+		$.ajax({
+			url: window.apiBaseUrl + '/v1/sellers'
+		}).then(function(data) {
+			$('<option>').val(null).text('Todos').appendTo('#sellers-combo');
+			$(data.results).map(function () {
+				return $('<option>').val(this.id).text(this.lastname+', '+this.name);
+			}).appendTo('#sellers-combo');
 		});
 
     </script>
@@ -148,7 +164,7 @@
 		<div id="filters">
 			<div id="sellersFilter" class="inline">
 				<label for="seller">Seleccione un vendedor:</label>
-				<input id="sellers-combo">
+				<select id="sellers-combo"></select>
 		    </div>
 		    <div id="dateFilter" class="inline">
 			    <label for="dateFilter">Mes y Año:</label>
@@ -185,7 +201,7 @@
 							$(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
 
 							$('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
-              refreshCharts();
+              				refreshCharts();
 						}
 					},
 					beforeShow : function(input, inst) {
