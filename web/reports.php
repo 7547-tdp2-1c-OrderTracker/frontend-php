@@ -71,25 +71,25 @@
 			var pastYear = (currentYear - 1).toString();
 
 
-			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+mmYyyy;
+			var url = window.apiBaseUrl + "/v1/report/monthSales?date="+currentMonth+'-'+currentYear;
 			var seller = $("select[id=sellers-combo]").val();
 			if (seller != null && seller.match(/[0-9]{1,}/) != null) {
-				url += "&seller="+seller;
+				url += "&seller_id="+seller;
 			}
 
-			//ajax(url).then(function(response) {
+			ajax(url).then(function(response) {
 				var data = google.visualization.arrayToDataTable([
 					['Año', pastYear, currentYear],
-					['Ventas', 8175000, 8008000]
+					['Ventas', response.report[1].amount, response.report[0].amount]
 				]);
 
 				var options = {
 					chart: {
-						title: 'Ventas del mes en curso ('+currentMonth+') en comparación con el año anterior',
-						subtitle: $.datepicker.formatDate( "MM yy", new Date( currentYear, currentMonth - 1, 1 )) + ' $ '+ 8008000
+						title: 'Ventas del mes en curso ('+$.datepicker.formatDate( "MM", new Date( currentYear, currentMonth - 1, 1 ))+') en comparación con el año anterior',
+						subtitle: $.datepicker.formatDate( "MM yy", new Date( currentYear, currentMonth - 1, 1 )) + ' '+response.currency+' '+ response.report[0].amount
 					},
 					hAxis: {
-						title: 'Total Vendido ($)'
+						title: 'Total Vendido ('+response.currency+')'
 					},
 					bars: 'horizontal',
 					series: {
@@ -102,17 +102,14 @@
 					width: 500,
 					height: 300
 				};
-				options.axes.x[pastYear] = {label: currentMonth+'/'+pastYear+' Ventas', side: 'top'};
-				options.axes.x[currentYear] = {label: currentMonth+'/'+currentYear+' Ventas'};
+				options.axes.x[pastYear] = {label: currentMonth+'-'+pastYear+' Ventas', side: 'top'};
+				options.axes.x[currentYear] = {label: currentMonth+'-'+currentYear+' Ventas'};
 				var material = new google.charts.Bar(document.getElementById('monthSalesComparison'));
 				material.draw(data, options);
-			//});
+			});
 		}
 
       //-------------------------------------------
-		function populateReport() {
-			console.log('Poluate report');
-		};
 		$.ajax({
 			url: window.apiBaseUrl + '/v1/sellers'
 		}).then(function(data) {
@@ -120,6 +117,9 @@
 			$(data.results).map(function () {
 				return $('<option>').val(this.id).text(this.lastname+', '+this.name);
 			}).appendTo('#sellers-combo');
+			$('#sellers-combo').change(function() {
+				drawMonthSalesComparison();
+			});
 		});
 
     </script>
