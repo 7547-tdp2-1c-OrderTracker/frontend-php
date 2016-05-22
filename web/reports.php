@@ -183,7 +183,7 @@
     }
     .report-subtitle {
     	font-weight: bold;
-    	border-bottom: gray;
+    	border-bottom: #f0f0f0;
 	    border-style: inset;
 	    border-top: transparent;
 	    border-left: transparent;
