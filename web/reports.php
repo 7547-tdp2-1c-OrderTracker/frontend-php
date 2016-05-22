@@ -164,6 +164,10 @@
 			});
 		});
 
+		$(function() {
+			$( document ).tooltip();
+		});
+
     </script>
     <style>
 	.ui-datepicker-calendar {
@@ -203,11 +207,11 @@
 		<div id="filters">
 			<div id="sellersFilter" class="inline">
 				<label for="seller">Seleccione un vendedor:</label>
-				<select id="sellers-combo"></select>
+				<select id="sellers-combo" title="Seleccione un vendedor para poder filtrar por el mismo"></select>
 		    </div>
 		    <div id="dateFilter" class="inline">
 			    <label for="dateFilter">Mes y Año:</label>
-	    		<input name="datepicker" id="datepicker" class="date-picker" readonly/>
+	    		<input name="datepicker" id="datepicker" class="date-picker" readonly  title="Seleccione un mes y a&ntilde;o"/>
 		    </div>
 		</div>
 
