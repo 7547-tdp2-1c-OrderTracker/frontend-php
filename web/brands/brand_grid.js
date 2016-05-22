@@ -1,9 +1,6 @@
 $("#dg").datagrid({
 	method: "GET",
-	url: window.apiBaseUrl + "/v1/brands",
-	loadFilter: function(response) {
-		return response.results
-	}
+	url: window.apiBaseUrl + "/v1/brands"
 });
 
 var url ;
