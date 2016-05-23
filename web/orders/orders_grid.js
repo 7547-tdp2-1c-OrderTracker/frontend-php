@@ -6,6 +6,8 @@ function orderDetail() {
 		$('#dlg').dialog('open').dialog('setTitle','Detalle del pedido');
 		$('#fm').form('load',row);
 		$('#fm').form('load',{date_created:formatDate(row.date_created)});
+		$('#status').combobox('loadData', getPosibleStates(row.status));
+		$('#status').combobox('select', formatStatus(row.status));
 		$('#products').datagrid({
 			url:'orders/get_order_products.php?id='+row.id,
 			columns:[[
@@ -49,19 +51,46 @@ function formatPrice(val, row) {
     return val;  // si se cambia rompe el filtro
 }
 
-function formatState(val) {
-	if (val === "draft") return "Borrador";
-	if (val === "cancelled") return "Cancelado";
-	if (val === "confirmed") return "Confirmado";
-	if (val === "delivered") return "Entregado";
-	if (val === "intransit") return "En Transito";
-	if (val === "prepared") return "Preparado";
-	
-    return val;
+var states = [
+	{text: 'Borrador', value: 'draft'},
+	{text: 'Confirmado', value: 'confirmed'},
+	{text: 'Preparado', value: 'prepared'},
+	{text: 'En camino', value: 'intransit'},
+	{text: 'Entregado', value: 'delivered'},
+	{text: 'Cancelado', value: 'cancelled'}
+];
+
+function formatStatus(val) {
+    var text;
+    $.each(states, function(i, state) {
+		if(state.value === val) {
+			text = state.text;
+			return false;
+		}
+    });
+    return text;
 }
 
-$('#dg').datagrid({
-	onLoadSuccess: function(data){
-		gridResize();
+function getPosibleStates(currState) {
+	switch(currState) {
+		case 'draft':
+			return [states[0], states[1], states[5]];
+	    case 'confirmed':
+			return [states[1], states[2], states[5]];
+	    case 'prepared':
+	    	return [states[2], states[1], states[3], states[5]];
+	    case 'intransit':
+			return [states[3], states[2], states[4], states[5]];
+	    case 'delivered':
+	    	return [states[4]];
+	    case 'cancelled':
+			return [states[5]];
 	}
-});
+}
+
+/*$(window).resize(function() {
+});*/
+
+var height = parseInt($('#modulo1').css("height")) - 
+			parseInt($('#modulo2').css("height")) - 20;
+$('#dg').css("height", height+"px");

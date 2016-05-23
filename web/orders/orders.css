@@ -1,6 +1,6 @@
 #dlg{
-	width:800px;
-	height:340px;
+	width:820px;
+	height:360px;
 	padding:10px 20px;
 }
 #fm{
@@ -21,10 +21,13 @@
 	display:inline-block;
 	width:100px;
 }
+.textbox-text{
+	width: 129px;
+}
 #form-container{
 	margin: 0 40px 0 0;
 	float:left;
-	width:250px;
+	width:240px;
 }
 #prods-container{
 	float:left;

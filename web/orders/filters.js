@@ -15,14 +15,15 @@ $(function(){
 		field:'status',
 		type:'combobox',
 		options:{
-			panelHeight:'auto',	data:[
+			panelHeight:'auto',
+			data:[
 				{value:'',text:'Todos'},
-				{value:'draft',text:'Borrador'},
-				{value:'confirmed',text:'Confirmado'},
-				{value:'cancelled',text:'Cancelado'},
-				{value:'intransit',text:'En camino'},
-				{value:'delivered',text:'Entregado'},
-				{value:'prepared',text:'Preparado'}
+				{value:'Borrador',text:'Borrador'},
+				{value:'Confirmado',text:'Confirmado'},
+				{value:'Cancelado',text:'Cancelado'},
+				{value:'En camino',text:'En camino'},
+				{value:'Entregado',text:'Entregado'},
+				{value:'Preparado',text:'Preparado'}
 			],
 			onChange:function(value){
 				if(value == '') {
