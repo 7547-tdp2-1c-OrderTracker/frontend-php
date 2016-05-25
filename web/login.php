@@ -19,7 +19,7 @@
 			<div class="col-md-5">
 				<img src="images/trackermanlogo2_azul.png"></img>
 			</div>				
-			<div class="col-md-7">
+			<div class="col-md-6">
 				<form id="loginfrm" data-toggle="validator">
 					<div class="form-group">
 						<label for="email">Email</label>
