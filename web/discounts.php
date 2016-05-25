@@ -60,13 +60,13 @@
 					</div>
 					<div class="fitem">
 						<label>Producto:</label>
-						<select id="select-product" class="selectized" placeholder="Buscar producto" tabindex="-1">
+						<select name="product_id" id="select-product" class="selectized" placeholder="Buscar producto" tabindex="-1">
 							<option value="" selected="selected"></option>
 						</select>
 					</div>
 					<div class="fitem">
 						<label>Marca:</label>
-						<select id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
+						<select name="brand_id" id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
 							<option value="" selected="selected"></option>
 						</select>
 					</div>

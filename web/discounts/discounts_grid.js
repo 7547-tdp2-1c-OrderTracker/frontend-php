@@ -1,4 +1,7 @@
 var url;
+var current_discount_id;
+var selectize_product;
+var selectize_brand;
 
 function formatRestriction(entity, row) {
 	if (row.product) {
@@ -10,11 +13,71 @@ function formatRestriction(entity, row) {
 	}
 }
 
+var initSelectize = function() {
+	selectize_product = $('#select-product').selectize({
+	  valueField: 'id',
+	  labelField: 'name',
+	  searchField: 'name',
+	  options: [],
+	  create: false,
+	  load: function(query, callback) {
+	    var escape = function(str) {
+	      return encodeURIComponent(str.replace(/\"/g, ''));
+	    };
+	    $.ajax({
+	      url: window.apiBaseUrl + '/v1/products?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+	      type: 'GET',
+				headers: {
+					authorization: Cookies.get("tmtoken")
+				},
+	      error: function() {
+	          callback();
+	      },
+	      success: function(res) {
+	          callback(res.results);
+	      }
+	    });          
+	  }
+	});
+
+	selectize_brand = $('#select-brand').selectize({
+	  valueField: 'id',
+	  labelField: 'name',
+	  searchField: 'name',
+	  options: [],
+	  create: false,
+	  load: function(query, callback) {
+	    var escape = function(str) {
+	      return encodeURIComponent(str.replace(/\"/g, ''));
+	    };
+	    $.ajax({
+	      url: window.apiBaseUrl + '/v1/brands?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+	      type: 'GET',
+				headers: {
+					authorization: Cookies.get("tmtoken")
+				},      
+	      error: function() {
+	          callback();
+	      },
+	      success: function(res) {
+	          callback(res.results);
+	      }
+	    });          
+	  }
+	});	
+};
+
 function newDiscount() {
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Descuento');
 	$('#fm').form('clear');
 	setDate("begin", new Date());
 	url = 'discounts/create_discount.php';
+
+	initSelectize();
+  selectize_product[0].selectize.setValue();
+  selectize_brand[0].selectize.setValue();
+
+  current_discount_id = null;
 }
 
 function editDiscount() {
@@ -24,20 +87,62 @@ function editDiscount() {
 		$('#fm').form('load',row);
 		setDate("begin", row.begin_date);
 		setDate("end", row.end_date);
-		$('#products-combo').combobox('setValue', row.product_id);
-		$('#brands-combo').combobox('setValue', row.brand_id);
+
+		initSelectize();
+
+		if (row.product) {
+			selectize_product[0].selectize.addOption({id: row.product_id, name: row.product.name});
+			selectize_product[0].selectize.setValue(row.product_id);
+		} else {
+			selectize_product[0].selectize.setValue();
+		}
+
+		if (row.brand) {
+			selectize_brand[0].selectize.addOption({id: row.brand_id, name: row.brand.name});
+			selectize_brand[0].selectize.setValue(row.brand_id);
+		} else {
+			selectize_brand[0].selectize.setValue();
+		}
+
+
+
+
 		url = 'discounts/edit_discount.php?id='+row.id;
+		current_discount_id = row.id;
 	}
 }
 
 function saveDiscount() {
-	$('#fm').form('submit',{
+	var data = {
+			product_id: $("select[name=product_id]").val(),
+			name: $("input[name=name]").val(),
+			percent: $("input[name=percent]").val(),
+			begin_date: $("input[name=begin_date]").val(),
+			end_date: $("input[name=end_date]").val(),
+			min_quantity: $("input[name=min_quantity]").val()
+	};
+
+	if (!data.product_id) {
+			data.brand_id = $("select[name=brand_id]").val();
+	}
+
+	var url, method;
+	if (current_discount_id) {
+		url = window.apiBaseUrl + "/v1/promotions/" + current_discount_id;
+		method = "PUT";
+	} else {
+		url = window.apiBaseUrl + "/v1/promotions";
+		method = "POST";
+	}
+
+	$.ajax({
 		url: url,
-		onSubmit: function(){
-			return $(this).form('validate');
+		method: method,
+		headers: {
+			authorization: Cookies.get("tmtoken")
 		},
-		success: function(result){
-			var result = eval('('+result+')');
+		data: data
+	}).then(function(result) {
 			if(result.errorMsg) {
 				$.messager.show({
 					title: 'Error',
@@ -47,8 +152,8 @@ function saveDiscount() {
 				$('#dlg').dialog('close');		// close the dialog
 				$('#dg').datagrid('reload');	// reload the user data
 			}
-		}
 	});
+
 }
 
 function deleteDiscount() {
@@ -90,57 +195,6 @@ $('#end').datebox({
 	}
 });
 
-$('#select-product').selectize({
-  valueField: 'id',
-  labelField: 'name',
-  searchField: 'name',
-  options: [],
-  create: false,
-  load: function(query, callback) {
-    var escape = function(str) {
-      return encodeURIComponent(str.replace(/\"/g, ''));
-    };
-    $.ajax({
-      url: window.apiBaseUrl + '/v1/products?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
-      type: 'GET',
-			headers: {
-				authorization: Cookies.get("tmtoken")
-			},
-      error: function() {
-          callback();
-      },
-      success: function(res) {
-          callback(res.results);
-      }
-    });          
-  }
-});
-
-$('#select-brand').selectize({
-  valueField: 'id',
-  labelField: 'name',
-  searchField: 'name',
-  options: [],
-  create: false,
-  load: function(query, callback) {
-    var escape = function(str) {
-      return encodeURIComponent(str.replace(/\"/g, ''));
-    };
-    $.ajax({
-      url: window.apiBaseUrl + '/v1/brands?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
-      type: 'GET',
-			headers: {
-				authorization: Cookies.get("tmtoken")
-			},      
-      error: function() {
-          callback();
-      },
-      success: function(res) {
-          callback(res.results);
-      }
-    });          
-  }
-});
 
 $('#dg').datagrid({
 	onLoadSuccess: function(data){
