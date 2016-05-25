@@ -14,6 +14,11 @@
 			curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
 		}
 		//var_dump($curl);
+		if (isset($_COOKIE['tmtoken'])) {
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+				'authorization: ' . $_COOKIE['tmtoken']
+			));
+		}
 
 	    $output = curl_exec($curl);
 	    curl_close($curl);
