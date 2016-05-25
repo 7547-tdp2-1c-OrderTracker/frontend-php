@@ -49,6 +49,5 @@
 	</div>
 
 	<script type="text/javascript" src="login/login.js"></script>
-	<script type="text/javascript" src="lib/js.cookie.js"></script>
 </body>
 </html>

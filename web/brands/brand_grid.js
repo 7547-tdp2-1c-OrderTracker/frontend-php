@@ -1,6 +1,17 @@
 $("#dg").datagrid({
-	method: "GET",
-	url: window.apiBaseUrl + "/v1/brands"
+	/*method: "GET"
+	url: window.apiBaseUrl + "/v1/brands"*/
+	loader: function(params, success, error) {
+		$.ajax({
+			url: window.apiBaseUrl + "/v1/brands?page=" + params.page + "&rows=" + params.rows,
+			method: "GET",
+			success: success,
+			error: error,
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			}
+		});
+	}
 });
 
 var url ;
@@ -36,6 +47,9 @@ function saveBrand() {
 			name: $(".brand-form input[name='name']").val(),
 			picture: $(".brand-form input[name='picture']").val()
 		},
+		headers: {
+			authorization: Cookies.get("tmtoken")
+		},
 		success: function(result) {
 			if(result.error) {
 				$.messager.show({
@@ -56,6 +70,9 @@ function deleteBrand() {
 		$.ajax({
 			url: window.apiBaseUrl + "/v1/brands/" + row.id,
 			method: 'DELETE',
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			},
 			success: function(result) {
 				if(result.error) {
 					$.messager.show({

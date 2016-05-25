@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="general/general.css">
 <script type="text/javascript" src="lib/moment.js"></script>
 <script type="text/javascript" src="general/utils.js"></script>
+<script type="text/javascript" src="lib/js.cookie.js"></script>
 
 <script>
 window.apiBaseUrl = '<?= $url ?>';

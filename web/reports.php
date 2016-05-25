@@ -36,7 +36,12 @@
 				url += "?year=" + year;
 			}
 
-			ajax(url).then(function(response) {
+			ajax({
+        url: url,
+        headers: {
+          authorization: Cookies.get("tmtoken")
+        }
+      }).then(function(response) {
     			// Create the data table.
     			var data = new google.visualization.DataTable();
     			data.addColumn('string', 'Topping');
@@ -79,7 +84,12 @@
 				customTitle += ' de '+$("#sellers-combo option:selected").text();
 			}
 
-			ajax(url).then(function(response) {
+			ajax({
+        url: url,
+        headers: {
+          authorization: Cookies.get("tmtoken")
+        }
+      }).then(function(response) {
 				var data = new google.visualization.DataTable();
 				data.addColumn('string', 'Topping');
 				data.addColumn('number', 'Slices');
@@ -115,7 +125,12 @@
 				customTitle += ' de '+$("#sellers-combo option:selected").text();
 			}
 
-			ajax(url).then(function(response) {
+			ajax({
+        url: url,
+        headers: {
+          authorization: Cookies.get("tmtoken")
+        }
+      }).then(function(response) {
 				var data = google.visualization.arrayToDataTable([
 					['Año', pastYear, currentYear],
 					['Ventas', response.report[1].amount, response.report[0].amount]
@@ -149,7 +164,10 @@
 
       //-------------------------------------------
 		$.ajax({
-			url: window.apiBaseUrl + '/v1/sellers'
+			url: window.apiBaseUrl + '/v1/sellers',
+      headers: {
+        authorization: Cookies.get("tmtoken")
+      }
 		}).then(function(data) {
 			$('<option>').val(null).text('Todos').appendTo('#sellers-combo');
 			$(data.results).map(function () {
