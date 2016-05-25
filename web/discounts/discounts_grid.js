@@ -90,23 +90,56 @@ $('#end').datebox({
 	}
 });
 
-
-$('#products-combo').combobox({
-    url:'products/get_products.php',
-    valueField:'id',
-    textField:'name',
-    onSelect:function(product) {
-    	$("[name='product_id']").val(product.id);
-    }
+$('#select-product').selectize({
+  valueField: 'id',
+  labelField: 'name',
+  searchField: 'name',
+  options: [],
+  create: false,
+  load: function(query, callback) {
+    var escape = function(str) {
+      return encodeURIComponent(str.replace(/\"/g, ''));
+    };
+    $.ajax({
+      url: window.apiBaseUrl + '/v1/products?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+      type: 'GET',
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			},
+      error: function() {
+          callback();
+      },
+      success: function(res) {
+          callback(res.results);
+      }
+    });          
+  }
 });
 
-$('#brands-combo').combobox({
-    url:'brands/get_brands.php',
-    valueField:'id',
-    textField:'name',
-    onSelect:function(brand) {
-    	$("[name='brand_id']").val(brand.id);
-    }
+$('#select-brand').selectize({
+  valueField: 'id',
+  labelField: 'name',
+  searchField: 'name',
+  options: [],
+  create: false,
+  load: function(query, callback) {
+    var escape = function(str) {
+      return encodeURIComponent(str.replace(/\"/g, ''));
+    };
+    $.ajax({
+      url: window.apiBaseUrl + '/v1/brands?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+      type: 'GET',
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			},      
+      error: function() {
+          callback();
+      },
+      success: function(res) {
+          callback(res.results);
+      }
+    });          
+  }
 });
 
 $('#dg').datagrid({

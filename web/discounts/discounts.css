@@ -28,3 +28,8 @@
 #prods-container{
 	float:left;
 }
+.fitem .selectize-control {
+	display:inline-block !important;
+	line-height: 10px !important;
+	width: 170px;
+}

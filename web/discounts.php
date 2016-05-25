@@ -60,13 +60,15 @@
 					</div>
 					<div class="fitem">
 						<label>Producto:</label>
-						<input id="products-combo">
-						<input type="hidden" name="product_id" value="">
+						<select id="select-product" class="selectized" placeholder="Buscar producto" tabindex="-1">
+							<option value="" selected="selected"></option>
+						</select>
 					</div>
 					<div class="fitem">
 						<label>Marca:</label>
-						<input id="brands-combo">
-		    			<input type="hidden" name="brand_id" value="">
+						<select id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
+							<option value="" selected="selected"></option>
+						</select>
 					</div>
 					<div class="fitem">
 						<label>Cantidad Mínima:</label>
