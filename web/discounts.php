@@ -5,6 +5,8 @@
 		include 'general/easyui_header.php';
 		include 'general/header.php';
 	?>
+	<script type="text/javascript" src="lib/selectize.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/css/selectize.css">
 </head>
 <body>
 	<?php
