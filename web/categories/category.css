@@ -1,0 +1,52 @@
+#dlg{
+	width:700px;
+	height:450px;
+	padding:10px 20px;
+}
+#fm{
+	margin:0;
+	padding:10px 30px;
+}
+.ftitle{
+	font-size:14px;
+	font-weight:bold;
+	padding:5px 0;
+	margin-bottom:10px;
+	border-bottom:1px solid #ccc;
+}
+.fitem{
+	margin-bottom:10px;
+}
+.fitem label{
+	display:inline-block;
+	width:90px;
+}
+.easyuibtn{
+    background-color: #fff;
+    border: 1px solid #95b8e7;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 0 3px;
+    overflow: hidden;
+    padding: 0 5px;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 181.333px;
+    height: 23.3333px;
+    line-height: 23.3333px;
+    font-size: 12px;
+}
+#form-container{
+	margin: 0 40px 0 0;
+	float:left;
+	width: 280px;
+}
+#images-container{
+	margin-top: 24px;
+}
+.image{
+	width: 100px;
+	height: 100px;
+	margin: 0 0 0 24px;
+}
