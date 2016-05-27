@@ -67,11 +67,11 @@
 						<label>Precio Min.:</label>
 						<input name="retailPrice" prefix="$" class="easyui-numberbox" data-options="min:0" required="required">
 					</div>
-					<div class="fitem">
+					<div class="fitem flex">
 						<label>Categorías:</label>
 						<input name="categories" class="selectized" tabindex="-1">
 					</div>
-					<div class="fitem">
+					<div class="fitem flex">
 						<label>Marca:</label>
 						<select name="brand_id" id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
 							<option value="" selected="selected"></option>
