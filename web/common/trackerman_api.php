@@ -2,7 +2,7 @@
 	include 'http_request.php';
 
 	class TrackermanAPI {
-		private static $baseUrl = "https://powerful-hollows-15939.herokuapp.com";
+		private static $baseUrl = "https://trackerman-api.herokuapp.com";
 
 		static function getBaseUrl() {
 			return self::$baseUrl;
@@ -56,12 +56,28 @@
 
 		// PRODUCTOS
 
+		static function getProduct($id) {
+			return getJSON(self::$baseUrl."/v1/products/".$id, []);
+		}
+
 		static function listProducts($limit, $offset) {
 			$vars['limit'] = $limit;
 			$vars['offset'] = $offset;
 
 			return getJSON(self::$baseUrl."/v1/products", $vars);
 		}		
+
+		static function createProduct($body) {
+			return postJSON(self::$baseUrl."/v1/products", $body);
+		}
+
+		static function editProduct($id, $body) {
+			return putJSON(self::$baseUrl."/v1/products/".$id, $body);
+		}
+
+		static function deleteProduct($id) {
+			return deleteJSON(self::$baseUrl."/v1/products/".$id);
+		}
 
 		// AGENDA
 
