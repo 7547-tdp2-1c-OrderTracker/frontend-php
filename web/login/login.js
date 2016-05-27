@@ -20,3 +20,26 @@ $("#loginfrm").submit(function(event) {
 
 	return null;
 });
+
+var token = Cookies.get("tmtoken");
+if (token) {
+	$.ajax({
+		url: window.apiBaseUrl + "/v1/auth/check",
+		headers: {
+			authorization: token
+		}
+	}).then(function() {
+		// si el token es valido, redirigir a client.php
+		window.location = "/client.php";
+	}, function(response) {
+		if (response.status == 403) {
+			// mostrar la pantalla de login
+			$("body").show();
+		} else {
+			// otros errores q no sean 403 llevan a client.php
+			window.location = "/client.php";
+		}
+	});
+} else {
+	$("body").show();
+}

@@ -1,11 +1,9 @@
 body {
     margin: 0;
     padding: 0;
+    display: none;
 }
 
-body:not(.login) {
-  display: none;
-}
 
 #modulo1 {
     float:left;
