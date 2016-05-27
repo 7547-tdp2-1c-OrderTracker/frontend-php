@@ -10,7 +10,7 @@
 	$attrs['wholesalePrice'] = htmlspecialchars($_REQUEST['wholesalePrice']);
 	$attrs['retailPrice'] = htmlspecialchars($_REQUEST['retailPrice']);
 	$attrs['brand_id'] = htmlspecialchars($_REQUEST['brand_id']);
-	$attrs['categories'] = htmlspecialchars($_REQUEST['categories']);
+	$attrs['categories'] = $_REQUEST['categories'];
 	
 	$json = TrackermanAPI::createProduct($attrs);
 
