@@ -77,3 +77,11 @@ td[field=description] div {
   width: 175px !important;
   line-height: 10px !important;
 }
+
+.selectize-control.multi .selectize-input .item {
+  background-color: #5062c7 !important;
+  color: white !important;
+  height: 14px !important;
+  font-weight: bold !important;
+  border-radius: 10px;
+}

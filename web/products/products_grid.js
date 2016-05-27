@@ -1,5 +1,6 @@
 var url, method;
 var selectize_brand;
+var selectize_categories;
 
 var initSelectize = function() {
 	selectize_brand = $('#select-brand').selectize({
@@ -26,7 +27,47 @@ var initSelectize = function() {
 	      }
 	    });          
 	  }
-	});	
+	});
+
+	if (selectize_categories) {
+		selectize_categories[0].selectize.destroy();
+	}
+	selectize_categories = $('#fm input[name=categories]').selectize({
+	  valueField: 'name',
+	  labelField: 'name',
+	  searchField: 'name',
+	  delimiter: ',',
+	  persist: false,
+	  create: function(input) {
+	      return {
+	          value: input,
+	          text: input
+	      }
+	  },
+		load: function(query, callback) {
+	    var escape = function(str) {
+	      return encodeURIComponent(str.replace(/\"/g, ''));
+	    };
+	    $.ajax({
+	      url: window.apiBaseUrl + '/v1/categories?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+	      type: 'GET',
+				headers: {
+					authorization: Cookies.get("tmtoken")
+				},      
+	      error: function() {
+	          callback();
+	      },
+	      success: function(res) {
+	          callback(res.results);
+	      }
+	    });          
+	  }	  ,
+		render: {
+    	option_create: function(data, escape) {
+      	return '<div class="create">Agregar <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+    	}
+  	}	  
+	});
 };
 
 function newProduct() {
@@ -39,6 +80,8 @@ function newProduct() {
 
 	initSelectize();
   selectize_brand[0].selectize.setValue();
+  
+  //selectize_categories[0].selectize.setValue();
 }
 
 
@@ -47,7 +90,6 @@ function editProduct() {
 	if(row) {
 		$('#dlg').dialog('open').dialog('setTitle','Editar Producto');
 		$('#fm').form('load',row);
-		$('#brands-combo').combobox('setValue', row.brand_id);
 		setImage("pictureImg", row.picture);
 		//url = 'products/edit_product.php?id='+row.id;
 
@@ -63,6 +105,9 @@ function editProduct() {
 		} else {
 			selectize_brand[0].selectize.setValue();
 		}
+
+	  //selectize_categories[0].selectize.setValue(row.categories);
+
 	}
 }
 

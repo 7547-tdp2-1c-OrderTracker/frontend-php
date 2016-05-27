@@ -69,7 +69,7 @@
 					</div>
 					<div class="fitem">
 						<label>Categorías:</label>
-						<input name="categories" class="easyui-textbox">
+						<input name="categories" class="selectized" tabindex="-1">
 					</div>
 					<div class="fitem">
 						<label>Marca:</label>
