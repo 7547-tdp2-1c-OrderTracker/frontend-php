@@ -40,8 +40,7 @@ var initSelectize = function() {
 	  persist: false,
 	  create: function(input) {
 	      return {
-	          value: input,
-	          text: input
+	          name: input
 	      }
 	  },
 		load: function(query, callback) {
