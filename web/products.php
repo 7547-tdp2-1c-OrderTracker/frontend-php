@@ -30,8 +30,8 @@
 					<th field="name">Nombre</th>
 					<th field="description">Descripción</th>
 					<th field="stock">Stock</th>
-					<th field="wholesalePrice">Precio May.</th>
-					<th field="retailPrice">Precio Min.</th>
+					<th field="wholesalePrice" formatter="formatPrice">Precio May.</th>
+					<th field="retailPrice" formatter="formatPrice">Precio Min.</th>
 					<th field="categories">Categorias</th>
 					<th field="brand_name">Marca</th>
 				</tr>

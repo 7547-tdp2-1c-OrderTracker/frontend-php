@@ -27,13 +27,14 @@
 			<thead>
 				<tr>
 					<th field="code">Codigo</th>
+					<th field="picture" align="center" formatter="formatPicture">Logo</th>
 					<th field="name">Nombre</th>
 				</tr>
 			</thead>
 		</table>
 		
 		<div id="dlg" class="easyui-dialog" closed="true" buttons="#dlg-buttons" width="400" height="400">
-			<div class="ftitle">marca</div>
+			<div class="ftitle">Marca</div>
 			<form class="brand-form" id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">

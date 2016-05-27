@@ -62,6 +62,11 @@ function deleteClient() {
 	}
 }
 
+function formatPicture(value,row,index) {
+	var size = 30;
+	return '<img src="'+row.thumbnail+'" style="width: '+size+'px; height: '+size+'px"/>';
+}
+
 $("[name='avatar']").bind('change', function(e) {
 	setImage("avatarImg", $(this).val());
 });

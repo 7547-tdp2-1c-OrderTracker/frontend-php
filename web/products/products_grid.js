@@ -64,6 +64,10 @@ function formatPicture(value,row,index) {
 	return '<img src="'+row.picture+'" style="width: '+size+'px; height: '+size+'px"/>';
 }
 
+function formatPrice(val, row) {
+    return "$"+val;
+}
+
 $("[name='picture']").bind('change', function(e) {
 	setImage("pictureImg", $(this).val());
 });

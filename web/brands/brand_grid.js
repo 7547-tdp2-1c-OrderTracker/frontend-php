@@ -88,6 +88,11 @@ function deleteBrand() {
 	}
 }
 
+function formatPicture(value,row,index) {
+	var size = 50;
+	return '<img src="'+row.picture+'" style="width: '+size+'px; height: '+size+'px"/>';
+}
+
 function setImage(image, src) {
 	if(!src || src.length === 0) {
 		src = "images/noimage.png";
