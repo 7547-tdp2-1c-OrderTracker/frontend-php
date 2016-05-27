@@ -17,3 +17,5 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="general/auth_check.js"></script>
+    

@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="login/login.css">
 	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
 </head>
-<body class="row">
+<body class="row login">
 	<div class="col-md-3">
 
 	</div>
