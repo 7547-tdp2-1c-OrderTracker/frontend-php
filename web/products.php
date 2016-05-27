@@ -6,7 +6,10 @@
 		include 'general/header.php';
 	?>
 
+	<script type="text/javascript" src="lib/selectize.js"></script>
 	<link rel="stylesheet" type="text/css" href="products/product.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/selectize.css">
+
 </head>
 <body>
 	<?php
@@ -70,8 +73,9 @@
 					</div>
 					<div class="fitem">
 						<label>Marca:</label>
-						<input id="brands-combo">
-		    			<input type="hidden" name="brand_id" value="" required="required">
+						<select name="brand_id" id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
+							<option value="" selected="selected"></option>
+						</select>
 					</div>
 					<div class="fitem">
 						<label>Imagen URL:</label>

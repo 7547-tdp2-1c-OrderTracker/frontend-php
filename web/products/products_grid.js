@@ -1,4 +1,33 @@
 var url, method;
+var selectize_brand;
+
+var initSelectize = function() {
+	selectize_brand = $('#select-brand').selectize({
+	  valueField: 'id',
+	  labelField: 'name',
+	  searchField: 'name',
+	  options: [],
+	  create: false,
+	  load: function(query, callback) {
+	    var escape = function(str) {
+	      return encodeURIComponent(str.replace(/\"/g, ''));
+	    };
+	    $.ajax({
+	      url: window.apiBaseUrl + '/v1/brands?where={"name":{"$like":"%25'+escape(query)+'%25"}}',
+	      type: 'GET',
+				headers: {
+					authorization: Cookies.get("tmtoken")
+				},      
+	      error: function() {
+	          callback();
+	      },
+	      success: function(res) {
+	          callback(res.results);
+	      }
+	    });          
+	  }
+	});	
+};
 
 function newProduct() {
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Producto');
@@ -7,7 +36,11 @@ function newProduct() {
 	//url = 'products/create_product.php';
 	method = 'POST';
 	url = window.apiBaseUrl + "/v1/products";
+
+	initSelectize();
+  selectize_brand[0].selectize.setValue();
 }
+
 
 function editProduct() {
 	var row = $('#dg').datagrid('getSelected');
@@ -20,6 +53,16 @@ function editProduct() {
 
 		method = 'PUT';
 		url = window.apiBaseUrl + "/v1/products/" + row.id;
+
+
+		initSelectize();
+
+		if (row.brand) {
+			selectize_brand[0].selectize.addOption({id: row.brand_id, name: row.brand.name});
+			selectize_brand[0].selectize.setValue(row.brand_id);
+		} else {
+			selectize_brand[0].selectize.setValue();
+		}
 	}
 }
 
@@ -36,7 +79,7 @@ function saveProduct() {
       wholesalePrice: $("#fm input[name='wholesalePrice']").val(),
       retailPrice: $("#fm input[name='retailPrice']").val(),
       retailPrice: $("#fm input[name='retailPrice']").val(),
-      brand_id: $("#fm input[name='brand_id']").val(),
+      brand_id: $("#fm select[name='brand_id']").val(),
       categories: $("#fm input[name='categories']").val()
     },
     headers: {

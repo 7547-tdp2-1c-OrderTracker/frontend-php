@@ -72,3 +72,8 @@ td[field=description] div {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.selectize-input {
+  width: 175px !important;
+  line-height: 10px !important;
+}
