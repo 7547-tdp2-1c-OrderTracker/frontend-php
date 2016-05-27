@@ -5,6 +5,8 @@
 		include 'general/easyui_header.php';
 		include 'general/header.php';
 	?>
+
+	<link rel="stylesheet" type="text/css" href="products/product.css">
 </head>
 <body>
 	<?php
@@ -86,7 +88,6 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
 		</div>
 	</div>
-	<link rel="stylesheet" type="text/css" href="products/product.css">
 	<script type="text/javascript" src="products/products_grid.js"></script>
 </body>
 </html>
