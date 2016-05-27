@@ -7,7 +7,7 @@
 	?>
 	<script type="text/javascript" src="lib/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="login/login.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css">
 </head>
 <body class="row">
 	<div class="col-md-3">
