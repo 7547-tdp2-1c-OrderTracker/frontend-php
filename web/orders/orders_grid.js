@@ -1,5 +1,12 @@
 var url;
 
+var order = function(o) {
+	o.seller_name = o.seller.name;
+	o.client_name = o.client.lastname + ", " + o.client.name;
+	o.company = o.client.company;
+	return o;
+};
+
 $("#dg").datagrid({
 	/*method: "GET"
 	url: window.apiBaseUrl + "/v1/brands"*/
@@ -7,7 +14,12 @@ $("#dg").datagrid({
 		$.ajax({
 			url: window.apiBaseUrl + "/v1/orders?page=1&rows=9999999",
 			method: "GET",
-			success: success,
+			success: function(resp) {
+				success({
+					rows: resp.rows.map(order),
+					total: resp.total
+				});
+			},
 			error: error,
 			headers: {
 				authorization: Cookies.get("tmtoken")
