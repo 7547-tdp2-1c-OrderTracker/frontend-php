@@ -12,7 +12,7 @@ $("#dg").datagrid({
 	url: window.apiBaseUrl + "/v1/brands"*/
 	loader: function(params, success, error) {
 		$.ajax({
-			url: window.apiBaseUrl + "/v1/orders?page=1&rows=9999999",
+			url: window.apiBaseUrl + "/v1/orders?page=1&rows=9999999&order=date_created",
 			method: "GET",
 			success: function(resp) {
 				success({
