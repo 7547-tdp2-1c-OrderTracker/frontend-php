@@ -32,14 +32,14 @@ if (token) {
 		// si el token es valido, redirigir a client.php
 		window.location = "/client.php";
 	}, function(response) {
-		if (response.status == 403) {
+		if (response.status == 403 || response.status == 500) {
 			// mostrar la pantalla de login
-			$("body").show();
+			$("body").css('opacity', 1);
 		} else {
 			// otros errores q no sean 403 llevan a client.php
 			window.location = "/client.php";
 		}
 	});
 } else {
-	$("body").show();
+	$("body").css('opacity', 1);
 }

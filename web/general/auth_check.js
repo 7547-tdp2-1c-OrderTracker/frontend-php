@@ -9,12 +9,12 @@ $.ajax({
 		authorization: token
 	}
 }).then(function() {
-	$("body").show();
+	$("body").css('opacity', 1);
 }, function(response) {
 	if (response.status == 403) {
 		// fallo la autenticacion, redirigir a login
 		window.location = "/login.php";
 	} else {
-		$("body").show();
+		$("body").css('opacity', 1);
 	}
 });
