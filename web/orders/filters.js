@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 	var dg = $('#dg').datagrid({
 		filterBtnIconCls:'icon-filter'
 	});
@@ -40,4 +40,4 @@ $(function(){
 			}
 		}
 	}]);
-});
+});*/
