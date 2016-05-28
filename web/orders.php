@@ -21,7 +21,10 @@
 		<div id="toolbar">
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="orderDetail()">Ver detalle</a>
 		</div>
-		<table id="dg" rownumbers="true" toolbar="#toolbar" singleSelect="true" url="orders/get_orders.php">
+		<table id="dg" class="easyui-datagrid" url="orders/get_orders.php" 
+				toolbar="#toolbar" pagination="true" pageSize="10" rownumbers="true" fitColumns="true" singleSelect="true">
+
+<!--		<table id="dg" rownumbers="true" toolbar="#toolbar" singleSelect="true" url="orders/get_orders.php">-->
 			<thead>
 				<tr>
 					<th data-options="field:'id'">Nro Pedido</th>

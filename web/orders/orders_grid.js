@@ -1,5 +1,21 @@
 var url;
 
+$("#dg").datagrid({
+	/*method: "GET"
+	url: window.apiBaseUrl + "/v1/brands"*/
+	loader: function(params, success, error) {
+		$.ajax({
+			url: window.apiBaseUrl + "/v1/orders?page=" + params.page + "&rows=" + params.rows,
+			method: "GET",
+			success: success,
+			error: error,
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			}
+		});
+	}
+});
+
 function orderDetail() {
 	var row = $('#dg').datagrid('getSelected');
 	if(row) {
