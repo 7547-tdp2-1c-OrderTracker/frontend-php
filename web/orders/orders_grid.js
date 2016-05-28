@@ -104,6 +104,5 @@ function getPosibleStates(currState) {
 	}
 }
 
-setTimeout(gridResize, 2500);
 /*$(window).resize(function() {
 });*/

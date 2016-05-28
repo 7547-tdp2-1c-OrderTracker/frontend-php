@@ -17,3 +17,5 @@ function gridResize() {
 		datagrid[0].style.height = $(window).height() - $('.datagrid-view').offset().top - 31+'px';
 	}
 }
+
+setTimeout(gridResize, 2500);
