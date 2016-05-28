@@ -88,9 +88,6 @@ function getPosibleStates(currState) {
 	}
 }
 
+setTimeout(gridResize, 2500);
 /*$(window).resize(function() {
 });*/
-
-var height = parseInt($('#modulo1').css("height")) - 
-			parseInt($('#modulo2').css("height")) - 20;
-$('#dg').css("height", height+"px");

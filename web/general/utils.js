@@ -6,7 +6,6 @@ function formatDate(date) {
 var $element = $(window), lastWidth = $element.width(), lastHeight = $element.height();
 //llamo a gridResize en el resize del window
 $(window).resize(gridResize)
-
 function gridResize() {
 	var dg = $('#dg');
 	if (dg != undefined && dg.datagrid != null) {
