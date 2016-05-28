@@ -5,7 +5,7 @@ $("#dg").datagrid({
 	url: window.apiBaseUrl + "/v1/brands"*/
 	loader: function(params, success, error) {
 		$.ajax({
-			url: window.apiBaseUrl + "/v1/orders?page=" + params.page + "&rows=" + params.rows,
+			url: window.apiBaseUrl + "/v1/orders?page=1&rows=9999999",
 			method: "GET",
 			success: success,
 			error: error,
