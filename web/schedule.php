@@ -51,18 +51,48 @@
 				</tr>
 			</table>
 		</div>
+
+		<div id="trasfer">
+			<b>Transferir clientes a:</b>
+			<input id="transfer-to-combo">
+			<a id="transfer-btn" class="easyui-linkbutton">Transferir</a>
+	    </div>
 	</div>
 
 	<link rel="stylesheet" type="text/css" href="schedule/schedule.css">
 	<script type="text/javascript" src="schedule/schedule.js"></script>
 
 	<script type="text/javascript">
+		$.extend($.fn.combobox.methods, {
+			deleteItem: function(jq, index){
+				return jq.each(function(){
+					var state = $.data(this, 'combobox');
+					$(this).combobox('getData').splice(index,1);
+					var panel = $(this).combobox('panel');
+					panel.children('.combobox-item:gt('+index+')').each(function(){
+						var id = $(this).attr('id');
+						var i = id.substr(state.itemIdPrefix.length+1);
+						$(this).attr('id', state.itemIdPrefix+'_'+(parseInt(i)-1));
+					});
+					panel.children('.combobox-item:eq('+index+')').remove();
+				})
+			}
+		});
+
 		$('#sellers-combo').combobox({
 	        url:'sellers/get_sellers.php',
 	        valueField:'id',
 	        textField:'email',
-	        onSelect: populateSchedule
+	        onSelect: selectSeller
 	    });
+
+	    $('#transfer-to-combo').combobox({
+	        valueField:'id',
+	        textField:'email',
+	        onSelect: selectTransferSeller
+	    });
+
+	    $('#transfer-btn').bind('click', transferClients);
 	</script>
 </body>
 </html>
