@@ -84,6 +84,7 @@ function deleteCategory() {
 }
 
 $('#dg').datagrid({
+  onDblClickCell: editCategory,
   onLoadSuccess: function(data){
     gridResize();
   }

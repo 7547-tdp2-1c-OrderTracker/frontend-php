@@ -138,6 +138,7 @@ function setImage(image, src) {
 }
 
 $('#dg').datagrid({
+	onDblClickCell: editSeller,
 	onLoadSuccess: function(data){
 		gridResize();
 	}

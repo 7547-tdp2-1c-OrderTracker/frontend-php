@@ -197,6 +197,7 @@ $('#end').datebox({
 
 
 $('#dg').datagrid({
+	onDblClickCell: editDiscount,
 	onLoadSuccess: function(data){
 		gridResize();
 	}

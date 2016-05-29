@@ -125,6 +125,7 @@ function formatSellerType(str) {
 }
 
 $('#dg').datagrid({
+	onDblClickCell: editClient,
 	onLoadSuccess: function(data){
 		gridResize();
 	}

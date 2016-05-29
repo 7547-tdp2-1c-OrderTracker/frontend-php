@@ -14,6 +14,7 @@ var order = function(o) {
 $("#dg").datagrid({
 	/*method: "GET"
 	url: window.apiBaseUrl + "/v1/brands"*/
+	onDblClickCell: orderDetail,
 	loader: function(params, success, error) {
 		$.ajax({
 			url: window.apiBaseUrl + "/v1/orders?page=1&rows=9999999&order=date_created",

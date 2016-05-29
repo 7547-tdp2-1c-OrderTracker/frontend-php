@@ -218,6 +218,7 @@ $('#brands-combo').combobox({
 });
 
 $('#dg').datagrid({
+	onDblClickCell: editProduct,
 	onLoadSuccess: function(data){
 		gridResize();
 	}

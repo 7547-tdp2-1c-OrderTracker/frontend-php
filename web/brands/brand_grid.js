@@ -107,6 +107,7 @@ $("input[name='picture']").bind('change', function(e) {
 });
 
 $('#dg').datagrid({
+	onDblClickCell: editBrand,
 	onLoadSuccess: function(data){
 		gridResize();
 	}
