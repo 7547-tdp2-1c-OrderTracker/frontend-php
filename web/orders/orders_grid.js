@@ -1,9 +1,13 @@
 var url;
 
+var getQuantity = function(x){return x.quantity; };
+var sum = function(a,b){return a+b; };
+
 var order = function(o) {
 	o.seller_name = o.seller.name;
 	o.client_name = o.client.lastname + ", " + o.client.name;
 	o.company = o.client.company;
+	o.items = (o.order_items||[]).map(getQuantity).reduce(sum, 0);
 	return o;
 };
 
