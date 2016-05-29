@@ -41,14 +41,14 @@
 			<form id="fm" method="post" novalidate>
 				<div id="form-container">
 					<div class="fitem">
-						<label>Nombre:</label>
-						<input name="name" class="easyui-textbox" required="required">
-					</div>
-					<div class="fitem">
 						<label>Apellido:</label>
 						<input name="lastname" class="easyui-textbox" required="required">
 					</div>
-		   			<div class="fitem">
+					<div class="fitem">
+						<label>Nombre:</label>
+						<input name="name" class="easyui-textbox" required="required">
+					</div>
+	   			<div class="fitem">
 						<label>Teléfono:</label>
 						<input name="phone_number" class="easyui-textbox">
 					</div>
@@ -59,6 +59,17 @@
 					<div class="fitem">
 						<label>Avatar URL:</label>
 						<input name="avatar" type="text" class="easyuibtn">
+					</div>
+					<div class="fitem">
+		    		<input type="checkbox" name="change_password" value="true">Cambiar Password
+		    	</div>
+					<div class="fitem">
+						<label>Password</label>
+						<input name="password" type="password" class="easyuibtn" disabled="true">
+					</div>
+					<div class="fitem">
+						<label>Confirmar password</label>
+						<input name="password_confirmation" type="password" class="easyuibtn" disabled="true">
 					</div>
 	    		<div id="images-container">
 	    			<img id="avatarImg" class="image"/>
