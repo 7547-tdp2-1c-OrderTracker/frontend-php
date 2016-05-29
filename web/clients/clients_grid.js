@@ -53,6 +53,7 @@ function saveClient() {
 			email: $("#fm input[name='email']").val(),
 			sellerType: $("#fm input[name='sellerType']").val(),
 			address: $("#fm input[name='address']").val(),
+			avatar: $("#fm input[name='avatar']").val(),
 			lat: $("#fm input[name='lat']").val(),
 			lon: $("#fm input[name='lon']").val()
 		},
