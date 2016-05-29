@@ -1,4 +1,5 @@
 var url;
+var method;
 
 function newClient() {
 	updateMap();
@@ -6,7 +7,8 @@ function newClient() {
 	$('#fm').form('clear');
 	setImage("avatarImg", "");
 	setImage("qrImg", "");
-	url = 'clients/create_client.php';
+	url = window.apiBaseUrl + "/v1/clients";
+	method = 'POST';
 }
 
 function editClient() {
@@ -17,29 +19,43 @@ function editClient() {
 		$('#fm').form('load',row);
 		setImage("avatarImg", row.avatar);
 		setImage("qrImg", "http://www.barcodes4.me/barcode/qr/qr.png?value="+row.id+"&size=6&ecclevel=0");
-		url = 'clients/edit_client.php?id='+row.id;
+		url = window.apiBaseUrl + "/v1/clients/" + row.id;
+		method = 'PUT';
 	}
 }
 
 function saveClient() {
-	$('#fm').form('submit',{
-		url: url,
-		onSubmit: function(){
-			return $(this).form('validate');
+	$.ajax({
+		url: url, 
+		method: method, 
+		data: {
+			name: $("#fm input[name='name']").val(),
+			lastname: $("#fm input[name='lastname']").val(),
+			cuil: $("#fm input[name='cuil']").val(),
+			company: $("#fm input[name='company']").val(),
+			phone_number: $("#fm input[name='phone_number']").val(),
+			email: $("#fm input[name='email']").val(),
+			sellerType: $("#fm input[name='sellerType']").val(),
+			address: $("#fm input[name='address']").val(),
+			lat: $("#fm input[name='lat']").val(),
+			lon: $("#fm input[name='lon']").val()
 		},
-		success: function(result){
-			var result = eval('('+result+')');
-			if(result.errorMsg) {
+		headers: {
+			authorization: Cookies.get("tmtoken")
+		},
+		success: function(result) {
+			if(result.error) {
 				$.messager.show({
 					title: 'Error',
-					msg: result.errorMsg
+					msg: result.error.value
 				});
 			} else {
 				$('#dlg').dialog('close');		// close the dialog
 				$('#dg').datagrid('reload');	// reload the user data
 			}
 		}
-	});
+	});	
+
 }
 
 function deleteClient() {
