@@ -24,8 +24,8 @@
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editClient()">Editar</a>
 			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteClient()">Eliminar</a>
 		</div>
-		<table id="dg" class="easyui-datagrid" url="clients/get_clients.php" 
-				toolbar="#toolbar" pagination="true" pageSize="20" rownumbers="true" fitColumns="true" singleSelect="true">
+		<table id="dg" class="easyui-datagrid"
+				toolbar="#toolbar" pagination="true" pageSize="20" rownumbers="true" fitColumns="true" singleSelect="true" method="GET">
 			<thead>
 				<tr>
 					<th field="id">Id</th>

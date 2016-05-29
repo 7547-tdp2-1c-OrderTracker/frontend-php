@@ -1,3 +1,19 @@
+$("#dg").datagrid({
+	/*method: "GET"
+	url: window.apiBaseUrl + "/v1/brands"*/
+	loader: function(params, success, error) {
+		$.ajax({
+			url: window.apiBaseUrl + "/v1/clients?page=" + params.page + "&rows=" + params.rows,
+			method: "GET",
+			success: success,
+			error: error,
+			headers: {
+				authorization: Cookies.get("tmtoken")
+			}
+		});
+	}
+});
+
 var url;
 var method;
 
