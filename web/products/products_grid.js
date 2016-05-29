@@ -111,6 +111,16 @@ function editProduct() {
 }
 
 function saveProduct() {
+	var brand_id = $("#fm select[name='brand_id']").val(); 
+	if (brand_id == "") {
+    $.messager.show({
+      title: 'Error',
+      msg: "No se puede crear un producto sin marca"
+    });
+
+    return;
+  }
+
   $.ajax({
     url: url, 
     method: method, 
@@ -123,23 +133,22 @@ function saveProduct() {
       wholesalePrice: $("#fm input[name='wholesalePrice']").val(),
       retailPrice: $("#fm input[name='retailPrice']").val(),
       retailPrice: $("#fm input[name='retailPrice']").val(),
-      brand_id: $("#fm select[name='brand_id']").val(),
+      brand_id: brand_id,
       categories: $("#fm input[name='categories']").val()
     },
     headers: {
       authorization: Cookies.get("tmtoken")
     },
     success: function(result) {
-      if(result.error) {
-        $.messager.show({
-          title: 'Error',
-          msg: result.error.value
-        });
-      } else {
-        $('#dlg').dialog('close');    // close the dialog
-        $('#dg').datagrid('reload');  // reload the user data
-      }
-    }
+      $('#dlg').dialog('close');    // close the dialog
+      $('#dg').datagrid('reload');  // reload the user data
+    },
+    error: function(xhr) {
+      $.messager.show({
+        title: 'Error',
+        msg: xhr.responseJSON.error ? xhr.responseJSON.error.value : "Error desconocido"
+      });
+   	}
   });	
 	/*$('#fm').form('submit',{
 		url: url,
