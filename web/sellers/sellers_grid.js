@@ -3,8 +3,6 @@ var method;
 
 $('#fm input[name=change_password]').on('change', function() {
 	var disabled = !($('#fm input[name=change_password]').prop('checked'));
-	$('#fm input[name=password]').val("");
-	$('#fm input[name=password_confirmation]').val("");
 	$('#fm input[name=password]').prop('disabled', disabled);
 	$('#fm input[name=password_confirmation]').prop('disabled', disabled);
 });
@@ -31,6 +29,8 @@ function editSeller() {
 		$('#fm').form('load',row);
 		setImage("avatarImg", row.avatar);
 
+		$('#fm input[name=password]').val("");
+		$('#fm input[name=password_confirmation]').val("");
 		$('#fm input[name=password]').prop('disabled', true);
 		$('#fm input[name=password_confirmation]').prop('disabled', true);
 		$('#fm input[name=change_password]').prop('checked', false);
