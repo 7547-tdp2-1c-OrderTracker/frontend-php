@@ -3,6 +3,19 @@ var current_discount_id;
 var selectize_product;
 var selectize_brand;
 
+
+var updateProductBrand = function() {
+	if ($("input[value=promotion_type_brand]").prop('checked')) {
+		$(".select-product").hide();
+		$(".select-brand").show();
+	} else {
+		$(".select-product").show();
+		$(".select-brand").hide();
+	}
+};
+
+$('#fm input[name=promotion_type]').on('change', updateProductBrand);
+
 function formatRestriction(entity, row) {
 	if (row.product) {
 		return "Producto: " + row.product.name;
@@ -77,6 +90,10 @@ function newDiscount() {
   selectize_product[0].selectize.setValue();
   selectize_brand[0].selectize.setValue();
 
+  $("input[value=promotion_type_product]").prop('checked', true);
+  $("input[value=promotion_type_brand]").prop('checked', false);
+  updateProductBrand();
+
   current_discount_id = null;
 }
 
@@ -104,8 +121,9 @@ function editDiscount() {
 			selectize_brand[0].selectize.setValue();
 		}
 
-
-
+	  $("input[value=promotion_type_product]").prop('checked', !!row.product_id);
+	  $("input[value=promotion_type_brand]").prop('checked', !!row.brand_id);
+	  updateProductBrand();
 
 		url = 'discounts/edit_discount.php?id='+row.id;
 		current_discount_id = row.id;
@@ -114,7 +132,6 @@ function editDiscount() {
 
 function saveDiscount() {
 	var data = {
-			product_id: $("select[name=product_id]").val(),
 			name: $("input[name=name]").val(),
 			percent: $("input[name=percent]").val(),
 			begin_date: $("input[name=begin_date]").val(),
@@ -122,8 +139,10 @@ function saveDiscount() {
 			min_quantity: $("input[name=min_quantity]").val()
 	};
 
-	if (!data.product_id) {
+	if ($("input[value=promotion_type_brand]").prop('checked')) {
 			data.brand_id = $("select[name=brand_id]").val();
+	} else {
+			data.product_id = $("select[name=product_id]").val();
 	}
 
 	var url, method;
@@ -141,17 +160,17 @@ function saveDiscount() {
 		headers: {
 			authorization: Cookies.get("tmtoken")
 		},
-		data: data
-	}).then(function(result) {
-			if(result.errorMsg) {
-				$.messager.show({
-					title: 'Error',
-					msg: result.errorMsg
-				});
-			} else {
-				$('#dlg').dialog('close');		// close the dialog
-				$('#dg').datagrid('reload');	// reload the user data
-			}
+		data: data,
+    success: function(result) {
+      $('#dlg').dialog('close');    // close the dialog
+      $('#dg').datagrid('reload');  // reload the user data
+    },
+    error: function(xhr) {
+      $.messager.show({
+        title: 'Error',
+        msg: xhr.responseJSON.error ? xhr.responseJSON.error.value : "Error desconocido"
+      });
+   	}		
 	});
 
 }

@@ -61,12 +61,16 @@
 						<input type="hidden" name="end_date" value="">
 					</div>
 					<div class="fitem">
+ 						<input type="radio" name="promotion_type" value="promotion_type_product">Por Producto<br>
+ 						<input type="radio" name="promotion_type" value="promotion_type_brand">Por Marca<br>
+					</div>
+					<div class="fitem select-product">
 						<label>Producto:</label>
 						<select name="product_id" id="select-product" class="selectized" placeholder="Buscar producto" tabindex="-1">
 							<option value="" selected="selected"></option>
 						</select>
 					</div>
-					<div class="fitem">
+					<div class="fitem select-brand">
 						<label>Marca:</label>
 						<select name="brand_id" id="select-brand" class="selectized" placeholder="Buscar marca" tabindex="-1">
 							<option value="" selected="selected"></option>
