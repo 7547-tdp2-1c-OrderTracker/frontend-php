@@ -46,15 +46,14 @@ function saveCategory() {
       authorization: Cookies.get("tmtoken")
     },
     success: function(result) {
-      if(result.error) {
-        $.messager.show({
-          title: 'Error',
-          msg: result.error.value
-        });
-      } else {
-        $('#dlg').dialog('close');    // close the dialog
-        $('#dg').datagrid('reload');  // reload the user data
-      }
+      $('#dlg').dialog('close');    // close the dialog
+      $('#dg').datagrid('reload');  // reload the user data
+    },
+    error: function(xhr) {
+      $.messager.show({
+        title: 'Error',
+        msg: xhr.responseJSON.error ? xhr.responseJSON.error.value : "Error desconocido"
+      });
     }
   });
 }
