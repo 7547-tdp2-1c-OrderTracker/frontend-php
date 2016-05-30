@@ -18,7 +18,7 @@ var url;
 var method;
 
 function newClient() {
-	updateMap();
+	updateMap(new google.maps.LatLng(-34.6174764,-58.3674312));
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Cliente');
 	$('#fm').form('clear');
 	setImage("avatarImg", "");
@@ -41,6 +41,12 @@ function editClient() {
 }
 
 function saveClient() {
+	if ($("#fm input[name='name']").val()=="") return;
+	if ($("#fm input[name='lastname']").val()=="") return;
+	if ($("#fm input[name='company']").val()=="") return;
+	if ($("#fm input[name='email']").val()=="") return;
+	if ($("#fm input[name='sellerType']").val()=="") return;
+
 	$.ajax({
 		url: url, 
 		method: method, 
