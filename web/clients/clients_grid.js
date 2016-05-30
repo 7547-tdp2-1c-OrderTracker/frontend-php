@@ -19,6 +19,8 @@ var method;
 
 function newClient() {
 	updateMap(new google.maps.LatLng(-34.6174764,-58.3674312));
+	$('#fm').form('load',{lat: -34.6174764,lon: -58.3674312});
+
 	$('#dlg').dialog('open').dialog('setTitle','Nuevo Cliente');
 	$('#fm').form('clear');
 	setImage("avatarImg", "");
