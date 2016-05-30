@@ -55,16 +55,31 @@ function orderDetail() {
 				{field:'quantity', title:'Cantidad'}
 			]]
 		});
-		url = 'orders/edit_order.php?id='+row.id;
+		url = window.apiBaseUrl + "/v1/orders/"+row.id;
 	}
 }
 
 function saveOrder() {
-	$('#fm').form('submit',{
-		url: url,
-		onSubmit: function(){
-			return $(this).form('validate');
-		},
+	var statusCode = {
+		'Borrador': 'draft',
+		'Confirmado': 'confirmed',
+		'Preparado': 'prepared',
+		'En camino': 'intransit',
+		'Entregado': 'delivered',
+		'Cancelado': 'cancelled'
+	};
+
+	var value = $("#fm input[name='status']").val();
+
+  $.ajax({
+    url: url, 
+    method: 'PUT', 
+    data: {
+      status: statusCode[value]||value
+    },
+    headers: {
+      authorization: Cookies.get("tmtoken")
+    },
     success: function(result) {
       $('#dlg').dialog('close');    // close the dialog
       $('#dg').datagrid('reload');  // reload the user data
@@ -75,7 +90,8 @@ function saveOrder() {
         msg: xhr.responseJSON.error ? xhr.responseJSON.error.value : "Error desconocido"
       });
    	}
-	});
+  });	
+
 }
 
 function formatPrice(val, row) {
