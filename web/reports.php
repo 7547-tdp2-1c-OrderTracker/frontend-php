@@ -146,7 +146,7 @@
 					},
 					bars: 'horizontal',
 					series: {
-						0: {axis: pastYear},
+						0: {axis: currentYear},
 						1: {axis: currentYear}
 					},
 					axes: {
